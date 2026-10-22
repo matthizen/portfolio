@@ -62,8 +62,8 @@ function ProjectPage() {
   const { slug } = Route.useParams();
   const p = getProject(slug)!;
   const idx = projects.findIndex((x) => x.slug === slug);
-  const prev = projects[(idx - 1 + projects.length) % projects.length];
-  const next = projects[(idx + 1) % projects.length];
+  const prev = projects[(idx - 1 + projects.length) % projects.length]!;
+  const next = projects[(idx + 1) % projects.length]!;
 
   return (
     <Page>
