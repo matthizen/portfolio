@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Page, SectionTitle, TagPill, seo } from "@/components/site/Layout";
+import { site } from "@/data/site";
 
 export const Route = createFileRoute("/about")({
   head: () => seo("About", "Background, career goals and technical skills of Matthews Martinez, NJIT IT student."),
@@ -19,7 +20,7 @@ const skills: Record<string, string[]> = {
 function About() {
   return (
     <Page>
-      <SectionTitle kicker="About">Hi, I'm Matt.</SectionTitle>
+      <SectionTitle kicker="About">Hi, I'm {site.name}.</SectionTitle>
       <div className="grid gap-8 md:grid-cols-2">
         <section className="rounded-lg border bg-card p-5">
           <h2 className="font-mono text-sm text-primary">// background</h2>
