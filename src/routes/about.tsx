@@ -13,7 +13,7 @@ const skills: Record<string, string[]> = {
   Virtualization: ["Proxmox VE", "Ubuntu Server VMs", "Linux"],
   Security: ["pfSense", "Firewall rules", "VLAN segmentation", "Tailscale VPN", "ACLs", "RADIUS/AAA", "Pi-hole DNS filtering"],
   "Automation/Scripting": ["Python", "Bash", "Git/GitHub"],
-  Cloud: ["[Add cloud skills]"],
+  Cloud: ["Cloud Networking\n"],
   Tools: ["Cisco Packet Tracer", "Wireshark", "Nagios", "Webmin", "SSH", "Structured cabling"],
 };
 
