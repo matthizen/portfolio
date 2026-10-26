@@ -19,9 +19,6 @@ function Home() {
           <p className="font-mono text-sm text-primary">$ whoami</p>
           <h1 className="mt-3 text-4xl font-bold tracking-tight md:text-6xl">{site.name}</h1>
           <p className="mt-4 max-w-2xl text-lg text-muted-foreground md:text-xl">{site.pitch}.</p>
-          <p className="mt-4 max-w-2xl text-muted-foreground">
-            {"\n"}
-          </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link to="/projects" className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground hover:bg-primary/90">
               View projects <ArrowRight className="h-4 w-4" />
