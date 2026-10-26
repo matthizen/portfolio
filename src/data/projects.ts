@@ -37,7 +37,7 @@ const PH_LEARNED = "[Add what you learned]";
 export const projects: Project[] = [
   {
     slug: "campus-network",
-    title: "Campus & Branch Network",
+    title: "Campus Branch Network",
     summary: "Multi-building campus plus remote branch with VLANs, inter-VLAN routing, DHCP and RIPv2 over serial WAN.",
     status: "Done",
     featured: true,
