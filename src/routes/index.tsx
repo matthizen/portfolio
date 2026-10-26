@@ -20,7 +20,7 @@ function Home() {
           <h1 className="mt-3 text-4xl font-bold tracking-tight md:text-6xl">{site.name}</h1>
           <p className="mt-4 max-w-2xl text-lg text-muted-foreground md:text-xl">{site.pitch}.</p>
           <p className="mt-4 max-w-2xl text-muted-foreground">
-            I build and troubleshoot networks — Cisco routing &amp; switching labs, a pfSense-based home network, and a Proxmox homelab with monitoring. Currently pursuing the <span className="font-mono text-primary">CCNA</span>.
+            {"\n"}
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link to="/projects" className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground hover:bg-primary/90">
