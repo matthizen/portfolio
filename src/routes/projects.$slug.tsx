@@ -46,9 +46,11 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
 }
 
 function Bullets({ items }: { items: string[] }) {
+  const visible = items.filter((i) => i.trim().length > 0);
+  if (!visible.length) return null;
   return (
     <ul className="space-y-2">
-      {items.map((i) => (
+      {visible.map((i) => (
         <li key={i} className="flex gap-3 text-muted-foreground">
           <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" aria-hidden />
           <span className={i.startsWith("[") ? "font-mono text-sm italic" : ""}>{i}</span>
