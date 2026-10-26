@@ -172,7 +172,7 @@ cat /etc/pve/storage.cfg`,
     ],
     learned: [
       "Ping/port checks need nothing on the target; SNMP reads interface data; NRPE runs local disk/load/memory checks.",
-      "Disk and load warnings catch issues early — e.g. the SD card corruption that once took down Pi-hole.",
+      "Disk and load warnings catch issues early",
       "State history shows when outages started and how often devices drop.",
       "Post-change verification gives confidence after VLAN or firewall changes.",
     ],
