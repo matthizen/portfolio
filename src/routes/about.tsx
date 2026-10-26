@@ -35,7 +35,7 @@ function About() {
           <ul className="mt-3 space-y-2 text-muted-foreground">
             <li>Earn the CCNA (in progress)</li>
             <li>Grow into a network engineering / IT infrastructure role</li>
-            <li>[Add more specific goals]</li>
+            <li>{"\n"}</li>
           </ul>
         </section>
       </div>
