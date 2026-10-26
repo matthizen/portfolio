@@ -31,8 +31,8 @@ export interface Project {
   learned: string[];
 }
 
-const PH_CHALLENGES = "[Add challenges & troubleshooting notes]";
-const PH_LEARNED = "[Add what you learned]";
+const PH_CHALLENGES = "\n";
+const PH_LEARNED = "\n";
 
 export const projects: Project[] = [
   {
