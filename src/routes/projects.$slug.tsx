@@ -98,17 +98,17 @@ function ProjectPage() {
 
       <Section title="What I built"><Bullets items={p.built} /></Section>
 
-      <Section title="Key configs & code">
+      <Section title={"\n"}>
         {p.snippets.length ? (
           <div className="grid gap-4">{p.snippets.map((s) => <CodeBlock key={s.title} {...s} />)}</div>
         ) : (
-          <p className="font-mono text-sm italic text-muted-foreground">[Add config or code snippet]</p>
+          <p className="font-mono text-sm italic text-muted-foreground">{"\n"}</p>
         )}
       </Section>
 
       <div className="grid gap-x-10 lg:grid-cols-2">
-        <Section title="Challenges & troubleshooting"><Bullets items={p.challenges} /></Section>
-        <Section title="What I learned"><Bullets items={p.learned} /></Section>
+        <Section title={"\n"}><Bullets items={p.challenges} /></Section>
+        <Section title={"\n"}><Bullets items={p.learned} /></Section>
       </div>
 
       <nav aria-label="Project navigation" className="mt-14 grid gap-4 border-t pt-6 sm:grid-cols-2">
