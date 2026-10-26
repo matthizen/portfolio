@@ -27,7 +27,7 @@ function About() {
           <ul className="mt-3 space-y-2 text-muted-foreground">
             <li><span className="text-foreground">NJIT</span> — B.A. Information Technology, expected May 2027</li>
             <li><span className="text-foreground">Hudson County CC</span> — A.S. Computer Science, Aug 2023 – Dec 2024</li>
-            <li>Hands-on homelab: pfSense, Ubiquiti, Proxmox, Linux, Nagios</li>
+            <li>{"\n"}</li>
           </ul>
         </section>
         <section className="rounded-lg border bg-card p-5">
