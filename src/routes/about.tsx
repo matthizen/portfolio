@@ -7,7 +7,7 @@ export const Route = createFileRoute("/about")({
   component: About,
 });
 
-// Skills sourced from resume + project notes. "Cloud" has none yet — placeholder.
+// Skills sourced from resume + project notes.
 const skills: Record<string, string[]> = {
   Networking: ["TCP/IP", "IPv4/IPv6", "Subnetting/CIDR", "VLANs", "802.1Q", "STP", "EtherChannel", "Inter-VLAN routing", "OSPF", "BGP", "RIPv2", "DHCP", "DNS", "NAT", "Cisco IOS", "Ubiquiti", "Troubleshooting"],
   Virtualization: ["Proxmox VE", "Ubuntu Server VMs", "Linux"],
