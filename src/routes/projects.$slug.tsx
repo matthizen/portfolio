@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import type { ReactNode } from "react";
 import { Page, TagPill } from "@/components/site/Layout";
 import { CodeBlock } from "@/components/site/CodeBlock";
@@ -90,6 +90,21 @@ function ProjectPage() {
           <div className="grid-bg flex aspect-[21/9] items-center justify-center rounded-lg border font-mono text-sm text-muted-foreground">[Add screenshot]</div>
         )}
       </Section>
+
+      {p.source && (
+        <Section title={p.source.title}>
+          <p className="max-w-3xl text-muted-foreground">{p.source.text}</p>
+          <a
+            href={p.source.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 inline-flex items-center gap-2 rounded-lg border px-4 py-2 font-mono text-sm text-primary transition-colors hover:border-primary"
+          >
+            {p.source.url}
+            <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+          </a>
+        </Section>
+      )}
 
       <div className="grid gap-x-10 lg:grid-cols-2">
         <Section title="Overview"><p className={p.overview.startsWith("[") ? "font-mono text-sm italic text-muted-foreground" : "text-muted-foreground"}>{p.overview}</p></Section>
