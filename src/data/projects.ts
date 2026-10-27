@@ -7,6 +7,7 @@ import tailscale from "@/assets/projects/tailscale.png";
 import nagios from "@/assets/projects/nagios.png";
 import capstone from "@/assets/projects/capstone.png";
 import labs from "@/assets/projects/troubleshooting-labs.png";
+import minecraft from "@/assets/projects/minecraft.png";
 
 export type Tag = "Networking" | "Security" | "Homelab" | "Automation" | "Cloud" | "Monitoring";
 
@@ -296,7 +297,8 @@ cat /etc/pve/storage.cfg`,
     status: "Done",
     tags: ["Homelab", "Networking"],
     tech: ["Proxmox VE", "Ubuntu Server", "Webmin", "AMP", "pfSense", "Port Forwarding", "Dynamic DNS (FreeDNS)"],
-    images: [],
+    thumbnail: minecraft,
+    images: [{ src: minecraft, alt: "Proxmox console of the minecraft-server virtual machine showing systemctl status ampinstmgr reporting the AMP Instance Manager active and the ADS01 instance running" }],
     overview: "Host a Minecraft server for friends that stays online 24/7.",
     built: [
       "Ubuntu Server VM on Proxmox (203.0.113.x).",
