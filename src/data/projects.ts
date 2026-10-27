@@ -8,6 +8,7 @@ import nagios from "@/assets/projects/nagios.png";
 import capstone from "@/assets/projects/capstone.png";
 import labs from "@/assets/projects/troubleshooting-labs.png";
 import minecraft from "@/assets/projects/minecraft.png";
+import homeServer from "@/assets/projects/home-server.png";
 
 export type Tag = "Networking" | "Security" | "Homelab" | "Automation" | "Cloud" | "Monitoring";
 
@@ -279,7 +280,8 @@ cat /etc/pve/storage.cfg`,
     status: "Done",
     tags: ["Homelab"],
     tech: ["Proxmox VE", "Virtualization", "RAM/SSD upgrade"],
-    images: [],
+    thumbnail: homeServer,
+    images: [{ src: homeServer, alt: "Proxmox VE 9.2.2 web console on node pve, with the Shell view open showing pveversion, the cluster resource table for the plex, portfolio, minecraft and Nagios guests, and pvesm storage status" }],
     overview: "Repurpose an old PC as a home server to host Plex, media/NAS, Minecraft and other experiments.",
     built: [
       "Upgraded RAM and SSD.",
