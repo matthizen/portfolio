@@ -9,6 +9,7 @@ import capstone from "@/assets/projects/capstone.png";
 import labs from "@/assets/projects/troubleshooting-labs.png";
 import minecraft from "@/assets/projects/minecraft.png";
 import homeServer from "@/assets/projects/home-server.png";
+import piHole from "@/assets/projects/pi-hole.jpg";
 
 export type Tag = "Networking" | "Security" | "Homelab" | "Automation" | "Cloud" | "Monitoring";
 
@@ -319,7 +320,8 @@ cat /etc/pve/storage.cfg`,
     status: "Done",
     tags: ["Homelab", "Security"],
     tech: ["Pi-hole", "Raspberry Pi", "DNS", "SSH", "Linux"],
-    images: [],
+    thumbnail: piHole,
+    images: [{ src: piHole, alt: "Raspberry Pi Zero W with a microSD card in its slot, next to an SD adaptor and a micro-USB power cable, annotated with labels for the SD card, the board, the adaptor and the power supply" }],
     overview: "Block unwanted ads for every device on the network by filtering DNS between the ISP and the LAN.",
     built: [
       "Flashed the software to a microSD card.",
