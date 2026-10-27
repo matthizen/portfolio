@@ -5,6 +5,7 @@ import hotel from "@/assets/projects/hotel.png";
 import pfsense from "@/assets/projects/pfsense.png";
 import tailscale from "@/assets/projects/tailscale.png";
 import nagios from "@/assets/projects/nagios.png";
+import capstone from "@/assets/projects/capstone.png";
 
 export type Tag = "Networking" | "Security" | "Homelab" | "Automation" | "Cloud" | "Monitoring";
 
@@ -118,7 +119,8 @@ interface GigabitEthernet0/0.100
     featured: true,
     tags: ["Networking", "Security"],
     tech: ["Cisco Packet Tracer", "VLANs", "802.1Q", "Inter-VLAN Routing", "DHCP", "DNS", "RADIUS/AAA", "SSH", "Syslog", "NTP", "ACLs", "NAT/PAT"],
-    images: [],
+    thumbnail: capstone,
+    images: [{ src: capstone, alt: "Packet Tracer topology of the enterprise network: an external ISP uplink, two border routers, two multilayer switches, four access switches and six VLAN segments for management, IT/admin, finance, general staff, servers and wireless" }],
     overview:
       "Turn a written set of enterprise requirements into a structured network architecture with clear segmentation, addressing, services and security boundaries.",
     built: [
