@@ -6,6 +6,7 @@ import pfsense from "@/assets/projects/pfsense.png";
 import tailscale from "@/assets/projects/tailscale.png";
 import nagios from "@/assets/projects/nagios.png";
 import capstone from "@/assets/projects/capstone.png";
+import labs from "@/assets/projects/troubleshooting-labs.png";
 
 export type Tag = "Networking" | "Security" | "Homelab" | "Automation" | "Cloud" | "Monitoring";
 
@@ -30,6 +31,7 @@ export interface Project {
   snippets: Snippet[];
   challenges: string[];
   learned: string[];
+  source?: { title: string; text: string; url: string };
 }
 
 const PH_CHALLENGES = "\n";
@@ -247,7 +249,13 @@ cat /etc/pve/storage.cfg`,
     status: "In progress",
     tags: ["Networking"],
     tech: ["Cisco Packet Tracer", "Cisco IOS", "Troubleshooting"],
-    images: [],
+    thumbnail: labs,
+    images: [{ src: labs, alt: "BridgeOpsOne Academy dashboard showing the Operations Labs catalog of 25 Packet Tracer troubleshooting labs, with a Lab 1 preview panel" }],
+    source: {
+      title: "Where the labs come from",
+      text: "These labs come from BridgeOpsOne Academy — the Operations Labs catalog I work through to practice structured troubleshooting.",
+      url: "https://bridgeopsone-academy.web.app/dashboard",
+    },
     overview: "Practice structured troubleshooting across realistic enterprise trouble tickets.",
     built: [
       "Lab 1 — Internet connectivity",
