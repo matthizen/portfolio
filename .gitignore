@@ -30,3 +30,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Static build packaged for the Proxmox VM (npm run build:static)
+portfolio-dist.tar.gz

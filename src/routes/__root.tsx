@@ -12,18 +12,28 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { SiteHeader, SiteFooter } from "@/components/site/Layout";
+import { SiteHeader, SiteFooter, buttonInk, useReveal } from "@/components/site/Layout";
 
 function NotFoundComponent() {
   return (
-    <main className="flex flex-1 items-center justify-center px-4 py-24">
-      <div className="max-w-md text-center">
-        <p className="font-mono text-sm text-primary">% Destination host unreachable</p>
-        <h1 className="mt-2 font-mono text-7xl font-bold">404</h1>
-        <p className="mt-3 text-muted-foreground">No route to this page. It may have moved or never existed.</p>
-        <Link to="/" className="mt-6 inline-flex rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">
-          Return to home
-        </Link>
+    <main className="mx-auto flex w-full max-w-[1440px] flex-1 flex-col justify-center px-4 py-24 sm:px-6 lg:px-8">
+      <h1 className="font-sans text-[clamp(6rem,28vw,22rem)] leading-[0.8]">404</h1>
+      <div className="mt-10 grid gap-6 md:grid-cols-2">
+        <p className="max-w-[40ch] text-lead leading-snug">
+          Destination host unreachable. There's no route to this page; it may have moved, or never
+          existed.
+        </p>
+        <div className="flex flex-wrap gap-3 md:justify-end md:self-end">
+          <Link to="/" className={buttonInk}>
+            Back to the home page
+          </Link>
+          <Link
+            to="/projects"
+            className="inline-flex min-h-12 items-center px-2 font-sans text-small font-bold underline underline-offset-4"
+          >
+            See the projects
+          </Link>
+        </div>
       </div>
     </main>
   );
@@ -72,10 +82,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Matthews Martinez | Network Engineering Portfolio" },
-      { name: "description", content: "Portfolio of Matthews Martinez, NJIT IT student focused on network engineering and infrastructure." },
+      { title: "Matthews Martinez | Networks and infrastructure" },
+      {
+        name: "description",
+        content:
+          "Matthews Martinez builds networks in Packet Tracer and runs them at home: pfSense, Proxmox, Nagios. IT student at NJIT, working toward the CCNA.",
+      },
       { name: "author", content: "Matthews Martinez" },
       { property: "og:type", content: "website" },
+      { name: "theme-color", content: "#e1ac10" },
       { name: "twitter:card", content: "summary" },
     ],
     links: [
@@ -85,7 +100,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap",
       },
     ],
   }),
@@ -95,11 +110,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   errorComponent: ErrorComponent,
 });
 
-const themeScript = `try{var t=localStorage.getItem('theme');if(t==='light')document.documentElement.classList.remove('dark');}catch(e){}`;
+// Runs before paint: marks JS as available (for entrance motion) and applies the saved or system theme.
+const themeScript = `(function(){var d=document.documentElement;d.classList.add('js');var t=null;try{t=localStorage.getItem('theme')}catch(e){}if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches))d.classList.add('dark');setTimeout(function(){if(!window.__reveal)d.classList.remove('js')},2500);})();`;
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang="en" id="top" suppressHydrationWarning>
       <head>
         <HeadContent />
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
@@ -114,11 +130,17 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  useReveal();
 
   return (
     <QueryClientProvider client={queryClient}>
       <div className="flex min-h-screen flex-col">
-        <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:p-2">Skip to content</a>
+        <a
+          href="#main"
+          className="sr-only z-50 bg-foreground p-3 font-sans text-background focus:not-sr-only focus:fixed focus:left-2 focus:top-2"
+        >
+          Skip to content
+        </a>
         <SiteHeader />
         <div id="main" className="flex flex-1 flex-col">
           <Outlet />

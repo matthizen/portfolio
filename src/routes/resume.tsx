@@ -1,38 +1,55 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Download, Github, Linkedin, Mail } from "lucide-react";
+import { Download } from "lucide-react";
 import type { ReactNode } from "react";
-import { Page, TagPill, seo } from "@/components/site/Layout";
-import { site } from "@/data/site";
+import { Page, buttonInk, seo } from "@/components/site/Layout";
+import { ResumeViewer } from "@/components/site/ResumeViewer";
+import { contacts, external, site } from "@/data/site";
 import { resume } from "@/data/resume";
 
 export const Route = createFileRoute("/resume")({
-  head: () => seo("Resume", "Resume of Matthews Martinez: education, networking projects, experience, skills and certifications."),
+  head: () =>
+    seo(
+      "Resume",
+      "The resume of Matthews Martinez, shown in full on the page: education, networking projects, experience, skills and certifications.",
+    ),
   component: Resume,
 });
 
+// Nothing on this page waits for an animation or a script: the resume is plain HTML and always visible.
+
 function Block({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <section className="border-t py-8 md:grid md:grid-cols-[180px_1fr] md:gap-8">
-      <h2 className="mb-4 font-mono text-sm uppercase tracking-widest text-primary md:mb-0">{title}</h2>
-      <div className="space-y-6">{children}</div>
+    <section className="grid gap-4 pt-10 md:grid-cols-[11rem_1fr] md:gap-8">
+      <h2 className="font-sans text-lead">{title}</h2>
+      <div className="grid gap-7">{children}</div>
     </section>
   );
 }
 
-function Entry({ title, sub, right, points }: { title: string; sub?: string; right?: string; points?: string[] }) {
+function Entry({
+  title,
+  sub,
+  when,
+  points,
+}: {
+  title: string;
+  sub?: string;
+  when?: string;
+  points?: string[];
+}) {
   return (
     <article>
-      <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
-        <h3 className="font-semibold">{title}</h3>
-        {right && <span className="shrink-0 font-mono text-xs text-muted-foreground">{right}</span>}
+      <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+        <h3 className="font-sans text-[1.1875rem] tracking-tight">{title}</h3>
+        {when && <p className="shrink-0 font-sans text-small text-muted-foreground">{when}</p>}
       </div>
-      {sub && <p className="text-sm text-muted-foreground">{sub}</p>}
-      {points && (
-        <ul className="mt-2 space-y-1.5">
-          {points.map((p) => (
-            <li key={p} className="flex gap-3 text-sm text-muted-foreground">
-              <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary" aria-hidden />
-              <span>{p}</span>
+      {sub && <p className="mt-1 font-sans text-small">{sub}</p>}
+      {points && points.length > 0 && (
+        <ul className="mt-3 grid gap-2">
+          {points.map((x) => (
+            <li key={x} className="grid grid-cols-[1.1rem_1fr]">
+              <span aria-hidden className="mt-[0.65em] h-1.5 w-1.5 bg-field" />
+              <span>{x}</span>
             </li>
           ))}
         </ul>
@@ -44,47 +61,101 @@ function Entry({ title, sub, right, points }: { title: string; sub?: string; rig
 function Resume() {
   return (
     <Page>
-      <header className="flex flex-col gap-6 pb-8 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <p className="font-mono text-xs uppercase tracking-widest text-primary">Resume</p>
-          <h1 className="mt-1 text-3xl font-semibold tracking-tight md:text-4xl">{site.name}</h1>
-          <p className="mt-2 text-muted-foreground">{site.pitch}</p>
-          <div className="mt-3 flex flex-wrap gap-4 font-mono text-sm text-muted-foreground">
-            <a href={`mailto:${site.email}`} className="flex items-center gap-1.5 hover:text-primary"><Mail className="h-4 w-4" aria-hidden />{site.email}</a>
-            <a href={site.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 hover:text-primary"><Linkedin className="h-4 w-4" aria-hidden />LinkedIn</a>
-            <a href={site.github} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 hover:text-primary"><Github className="h-4 w-4" aria-hidden />GitHub</a>
-          </div>
+      <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
+        <h1 className="text-head lg:col-span-7">My resume, in full</h1>
+        <div className="lg:col-span-5">
+          <p className="max-w-[44ch]">
+            Everything is on this page; nothing to open or unfold. The PDF is the same document,
+            ready to print or forward.
+          </p>
+          <a
+            href={site.resume}
+            download="Matthews_Martinez_Resume.pdf"
+            className={`${buttonInk} mt-6`}
+          >
+            <Download className="h-4 w-4" aria-hidden /> Download the PDF
+          </a>
         </div>
-        <a href={site.resume} download="Matthews_Martinez_Resume.pdf" className="inline-flex shrink-0 items-center gap-2 self-start rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 sm:self-auto">
-          <Download className="h-4 w-4" /> Download PDF
-        </a>
-      </header>
+      </div>
 
-      <Block title="Education">
-        {resume.education.map((e) => <Entry key={e.school} title={e.school} sub={`${e.degree} · ${e.location}`} right={e.dates} />)}
-      </Block>
-      <Block title="Projects">
-        {resume.projects.map((p) => <Entry key={p.title} title={p.title} points={p.points} />)}
-      </Block>
-      <Block title="Experience">
-        {resume.experience.map((e) => <Entry key={e.role} title={e.role} sub={`${e.org} · ${e.location}`} right={e.dates} points={e.points} />)}
-      </Block>
-      <Block title="Skills">
-        {Object.entries(resume.skills).map(([cat, list]) => (
-          <div key={cat}>
-            <h3 className="mb-2 text-sm font-semibold">{cat}</h3>
-            <div className="flex flex-wrap gap-1.5">{list.map((s) => <TagPill key={s}>{s}</TagPill>)}</div>
+      <div className="mt-14 grid gap-12 lg:grid-cols-12">
+        <article aria-label="Resume" className="bg-card p-5 sm:p-10 lg:col-span-8">
+          <header>
+            <p className="font-sans text-sub font-bold tracking-tight">{site.name}</p>
+            <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2 font-sans text-small">
+              {contacts.map((c) => (
+                <li key={c.label}>
+                  <span className="text-muted-foreground">{c.label} </span>
+                  <a
+                    href={c.href}
+                    {...external(c.href)}
+                    className="break-all font-bold underline underline-offset-4 hover:no-underline"
+                  >
+                    {c.value}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </header>
+
+          <Block title="Education">
+            {resume.education.map((e) => (
+              <Entry
+                key={e.school}
+                title={e.school}
+                sub={`${e.degree} · ${e.location}`}
+                when={e.dates}
+              />
+            ))}
+          </Block>
+
+          <Block title="Projects">
+            {resume.projects.map((p) => (
+              <Entry key={p.title} title={p.title} points={p.points} />
+            ))}
+          </Block>
+
+          <Block title="Experience">
+            {resume.experience.map((e) => (
+              <Entry
+                key={e.role}
+                title={e.role}
+                sub={`${e.org} · ${e.location}`}
+                when={e.dates}
+                points={e.points}
+              />
+            ))}
+          </Block>
+
+          <Block title="Skills">
+            {Object.entries(resume.skills).map(([k, v]) => (
+              <p key={k}>
+                <strong className="font-sans">{k}:</strong> {v.join(", ")}
+              </p>
+            ))}
+          </Block>
+
+          <Block title="Certifications">
+            {resume.certifications.map((c) => (
+              <p key={c.name}>
+                <strong className="font-sans">{c.name}</strong> ({c.status.toLowerCase()})
+              </p>
+            ))}
+          </Block>
+        </article>
+
+        <aside aria-labelledby="pdf-h" className="lg:col-span-4">
+          <div className="lg:sticky lg:top-8">
+            <h2 id="pdf-h" className="font-sans text-sub">
+              The PDF
+            </h2>
+            <p className="mt-3 text-muted-foreground">The exact file you'll download, one page.</p>
+            <div className="mt-6 bg-card p-2">
+              <ResumeViewer src={site.resume} title="Resume of Matthews Martinez, PDF, one page" />
+            </div>
           </div>
-        ))}
-      </Block>
-      <Block title="Certifications">
-        {resume.certifications.map((c) => (
-          <div key={c.name} className="flex items-center gap-3">
-            <span className="font-semibold">{c.name}</span>
-            <span className="rounded border border-primary px-2 py-0.5 font-mono text-xs text-primary">{c.status}</span>
-          </div>
-        ))}
-      </Block>
+        </aside>
+      </div>
     </Page>
   );
 }

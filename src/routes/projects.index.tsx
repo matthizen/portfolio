@@ -1,11 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Page, SectionTitle, seo } from "@/components/site/Layout";
-import { ProjectCard } from "@/components/site/ProjectCard";
-import { allTags, projects, type Tag } from "@/data/projects";
+import { Page, PageTitle, seo } from "@/components/site/Layout";
+import { ProjectRow } from "@/components/site/ProjectCard";
+import { allTags, projects, roadmap, type Tag } from "@/data/projects";
 
 export const Route = createFileRoute("/projects/")({
-  head: () => seo("Projects", "Networking, homelab, security and monitoring projects by Matthews Martinez."),
+  head: () =>
+    seo(
+      "Projects",
+      "Ten networking, homelab, security and monitoring builds by Matthews Martinez, each with its topology, configs and what went wrong.",
+    ),
   component: Projects,
 });
 
@@ -14,26 +18,60 @@ function Projects() {
   const list = tag === "All" ? projects : projects.filter((p) => p.tags.includes(tag));
   return (
     <Page>
-      <SectionTitle kicker="Projects">Labs, builds &amp; homelab</SectionTitle>
-      <div role="group" aria-label="Filter by tag" className="mb-8 flex flex-wrap gap-2">
-        {(["All", ...allTags] as const).map((t) => (
-          <button
-            key={t}
-            onClick={() => setTag(t)}
-            aria-pressed={tag === t}
-            className={`rounded-md border px-3 py-1.5 font-mono text-xs transition-colors ${tag === t ? "border-primary bg-primary text-primary-foreground" : "text-muted-foreground hover:border-primary hover:text-primary"}`}
-          >
-            {t}
-          </button>
+      <PageTitle title="Projects">
+        <p>
+          Packet Tracer designs and the real network I live on, each with its topology and configs.
+        </p>
+      </PageTitle>
+
+      <div
+        role="group"
+        aria-label="Filter projects by topic"
+        className="mb-10 flex flex-wrap gap-2"
+      >
+        {(["All", ...allTags] as const).map((t) => {
+          const count =
+            t === "All" ? projects.length : projects.filter((p) => p.tags.includes(t)).length;
+          return (
+            <button
+              key={t}
+              type="button"
+              onClick={() => setTag(t)}
+              aria-pressed={tag === t}
+              className="min-h-11 bg-card px-4 font-sans text-small font-medium transition-colors hover:bg-muted active:scale-95 aria-pressed:bg-foreground aria-pressed:text-background"
+            >
+              {t} <span className="opacity-60">{count}</span>
+            </button>
+          );
+        })}
+      </div>
+
+      <p className="sr-only" aria-live="polite">
+        {list.length} projects shown
+      </p>
+      <div data-reveal className="grid gap-4">
+        {list.map((p) => (
+          <ProjectRow key={p.slug} p={p} />
         ))}
       </div>
-      {list.length ? (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {list.map((p) => <ProjectCard key={p.slug} p={p} />)}
-        </div>
-      ) : (
-        <p className="font-mono text-sm text-muted-foreground">No projects with this tag yet.</p>
-      )}
+
+      <section
+        aria-labelledby="roadmap-h"
+        data-reveal
+        className="mt-32 grid gap-10 lg:grid-cols-12"
+      >
+        <h2 id="roadmap-h" className="text-head lg:col-span-5">
+          Not started yet
+        </h2>
+        <ul className="grid gap-8 sm:grid-cols-3 lg:col-span-7">
+          {roadmap.map((r) => (
+            <li key={r.title}>
+              <h3 className="font-sans text-lead">{r.title}</h3>
+              <p className="mt-2 text-muted-foreground">{r.text}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
     </Page>
   );
 }

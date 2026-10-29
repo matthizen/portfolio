@@ -1,83 +1,94 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
-import { Menu, Moon, Sun, X } from "lucide-react";
-import { site } from "@/data/site";
+import { Moon, Sun } from "lucide-react";
+import { contacts, external, site } from "@/data/site";
 
 const nav = [
-  { to: "/", label: "Home" },
-  { to: "/about", label: "About" },
   { to: "/projects", label: "Projects" },
-  { to: "/certifications", label: "Certifications" },
+  { to: "/about", label: "About" },
   { to: "/resume", label: "Resume" },
   { to: "/contact", label: "Contact" },
 ] as const;
 
 function ThemeToggle() {
-  const [dark, setDark] = useState(true);
+  const [dark, setDark] = useState(false);
   useEffect(() => setDark(document.documentElement.classList.contains("dark")), []);
   const toggle = () => {
     const next = !dark;
     setDark(next);
     document.documentElement.classList.toggle("dark", next);
-    localStorage.setItem("theme", next ? "dark" : "light");
+    try {
+      localStorage.setItem("theme", next ? "dark" : "light");
+    } catch {
+      /* storage blocked: the choice lasts for this visit only */
+    }
   };
   return (
     <button
+      type="button"
       onClick={toggle}
       aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
-      className="rounded-md border p-2 text-muted-foreground transition-colors hover:text-primary"
+      className="grid h-10 w-10 place-items-center transition-transform hover:-rotate-12 active:scale-90"
     >
-      {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+      {dark ? <Sun className="h-5 w-5" aria-hidden /> : <Moon className="h-5 w-5" aria-hidden />}
     </button>
   );
 }
 
+const navLink =
+  "relative py-2 font-sans text-small font-medium after:absolute after:inset-x-0 after:bottom-1 after:h-0.5 after:origin-left after:scale-x-0 after:bg-current after:transition-transform hover:after:scale-x-100";
+
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const path = useRouterState({ select: (s) => s.location.pathname });
+  const onField = path === "/";
+  useEffect(() => setOpen(false), [path]);
+
   return (
-    <header className="sticky top-0 z-40 border-b bg-background/85 backdrop-blur">
-      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
-        <Link to="/" className="font-mono text-sm font-semibold">
-          <span className="text-primary">matt</span>@njit:~$
+    <header className={onField ? "bg-field text-field-ink" : "bg-background text-foreground"}>
+      <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+        <Link to="/" className="font-sans text-small font-bold tracking-tight">
+          Matthews Martinez
         </Link>
-        <nav aria-label="Main" className="hidden items-center gap-1 md:flex">
+        <nav aria-label="Main" className="hidden items-center gap-7 md:flex">
           {nav.map((n) => (
             <Link
               key={n.to}
               to={n.to}
-              activeOptions={{ exact: n.to === "/" }}
-              className="rounded-md px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
-              activeProps={{ className: "text-primary" }}
+              className={navLink}
+              activeProps={{ className: "after:scale-x-100" }}
             >
               {n.label}
             </Link>
           ))}
-          <div className="ml-2"><ThemeToggle /></div>
+          <ThemeToggle />
         </nav>
-        <div className="flex items-center gap-2 md:hidden">
+        <div className="flex items-center gap-1 md:hidden">
           <ThemeToggle />
           <button
+            type="button"
             onClick={() => setOpen(!open)}
             aria-expanded={open}
             aria-controls="mobile-nav"
-            aria-label="Toggle menu"
-            className="rounded-md border p-2"
+            className="h-10 px-2 font-sans text-small font-bold active:scale-95"
           >
-            {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+            {open ? "Close" : "Menu"}
           </button>
         </div>
       </div>
       {open && (
-        <nav id="mobile-nav" aria-label="Mobile" className="border-t md:hidden">
-          <ul className="mx-auto max-w-6xl px-4 py-2">
+        <nav
+          id="mobile-nav"
+          aria-label="Mobile"
+          className="animate-in fade-in slide-in-from-top-2 duration-300 md:hidden"
+        >
+          <ul className="px-4 pb-6 sm:px-6">
             {nav.map((n) => (
               <li key={n.to}>
                 <Link
                   to={n.to}
-                  onClick={() => setOpen(false)}
-                  activeOptions={{ exact: n.to === "/" }}
-                  className="block py-2 font-mono text-sm text-muted-foreground"
-                  activeProps={{ className: "text-primary" }}
+                  className="block py-2.5 font-sans text-[1.75rem] font-bold tracking-tight"
+                  activeProps={{ className: "underline underline-offset-8" }}
                 >
                   {n.label}
                 </Link>
@@ -90,39 +101,106 @@ export function SiteHeader() {
   );
 }
 
+const footerLinks = contacts.filter((c) => c.label !== "Phone");
+
 export function SiteFooter() {
   return (
-    <footer className="border-t">
-      <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-6 font-mono text-xs text-muted-foreground sm:flex-row sm:justify-between">
-        <span>© {new Date().getFullYear()} {site.name}</span>
-        <span className="flex gap-4">
-          <a href={`mailto:${site.email}`} className="hover:text-primary">email</a>
-          <a href={site.linkedin} target="_blank" rel="noreferrer" className="hover:text-primary">linkedin</a>
-          <a href={site.github} target="_blank" rel="noreferrer" className="hover:text-primary">github</a>
-        </span>
-      </div>
+    <footer className="bg-card">
+      <nav aria-label="Contact" className="mx-auto max-w-[1440px] px-4 py-8 sm:px-6 lg:px-8">
+        <ul className="flex flex-wrap gap-x-8 gap-y-3 font-sans text-small font-bold">
+          {footerLinks.map((c) => (
+            <li key={c.label}>
+              <a href={c.href} {...external(c.href)} className="hover:underline underline-offset-4">
+                {c.label}
+              </a>
+            </li>
+          ))}
+          <li>
+            <Link to="/resume" className="hover:underline underline-offset-4">
+              Resume
+            </Link>
+          </li>
+        </ul>
+      </nav>
     </footer>
   );
 }
 
-export function Page({ children }: { children: ReactNode }) {
-  return <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-10 md:py-16 animate-in fade-in duration-500">{children}</main>;
+/**
+ * Lets every [data-reveal] block rise in once as it scrolls into view. A MutationObserver picks up
+ * blocks added by client-side navigation, which mount after the URL has already changed.
+ */
+export function useReveal() {
+  useEffect(() => {
+    // Tells the inline fallback in __root that the app is running, so it won't unhide everything.
+    (window as unknown as { __reveal?: boolean }).__reveal = true;
+    const pending = () =>
+      Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]:not(.is-in)"));
+
+    if (!("IntersectionObserver" in window) || !("MutationObserver" in window)) {
+      document.documentElement.classList.remove("js");
+      return;
+    }
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            e.target.classList.add("is-in");
+            io.unobserve(e.target);
+          }
+        }
+      },
+      { rootMargin: "0px 0px -8% 0px" },
+    );
+    const watched = new WeakSet<Element>();
+    const watch = () => {
+      for (const el of pending()) {
+        if (watched.has(el)) continue;
+        watched.add(el);
+        io.observe(el);
+      }
+    };
+    watch();
+    const mo = new MutationObserver(watch);
+    mo.observe(document.body, { childList: true, subtree: true });
+    return () => {
+      mo.disconnect();
+      io.disconnect();
+    };
+  }, []);
 }
 
-export function SectionTitle({ kicker, children }: { kicker?: string; children: ReactNode }) {
+export function Page({ children }: { children: ReactNode }) {
   return (
-    <div className="mb-6">
-      {kicker && <p className="font-mono text-xs uppercase tracking-widest text-primary">{kicker}</p>}
-      <h1 className="mt-1 text-3xl font-semibold tracking-tight md:text-4xl">{children}</h1>
+    <main className="mx-auto w-full max-w-[1440px] flex-1 px-4 pb-32 pt-10 sm:px-6 md:pt-16 lg:px-8">
+      {children}
+    </main>
+  );
+}
+
+/** Page title block: one h1 and the sentence that explains it. */
+export function PageTitle({ title, children }: { title: string; children?: ReactNode }) {
+  return (
+    <div data-reveal className="mb-16 grid gap-6 md:mb-24 lg:grid-cols-12">
+      <h1 className="text-head lg:col-span-8">{title}</h1>
+      {children && (
+        <div className="max-w-[46ch] text-lead leading-snug lg:col-span-4 lg:self-end">
+          {children}
+        </div>
+      )}
     </div>
   );
 }
 
 export function TagPill({ children }: { children: ReactNode }) {
-  return (
-    <span className="inline-block rounded border bg-muted px-2 py-0.5 font-mono text-xs text-muted-foreground">{children}</span>
-  );
+  return <span className="inline-block bg-card px-2.5 py-1 font-sans text-small">{children}</span>;
 }
+
+export const buttonInk =
+  "inline-flex min-h-12 items-center justify-center gap-2 bg-foreground px-6 font-sans text-small font-bold text-background transition-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]";
+export const buttonAccent =
+  "inline-flex min-h-12 items-center justify-center gap-2 bg-primary px-6 font-sans text-small font-bold text-primary-foreground transition-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]";
 
 export function seo(title: string, description: string) {
   const t = `${title} | Matthews Martinez`;

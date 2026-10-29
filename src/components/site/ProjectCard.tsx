@@ -1,34 +1,40 @@
 import { Link } from "@tanstack/react-router";
-import { Network } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import type { Project } from "@/data/projects";
-import { TagPill } from "./Layout";
 
-export function ProjectCard({ p }: { p: Project }) {
+/** One project in the index: big title on the left, its picture on the right. */
+export function ProjectRow({ p }: { p: Project }) {
   return (
     <Link
       to="/projects/$slug"
       params={{ slug: p.slug }}
-      className="group flex flex-col overflow-hidden rounded-lg border bg-card transition-all hover:-translate-y-0.5 hover:border-primary/60"
+      className="group grid gap-5 bg-card p-4 transition-colors hover:bg-muted sm:p-6 md:grid-cols-12 md:gap-8"
     >
-      <div className="aspect-video overflow-hidden border-b bg-muted">
-        {p.thumbnail ? (
-          <img src={p.thumbnail} alt={`${p.title} screenshot`} loading="lazy" className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105" />
-        ) : (
-          <div className="grid-bg flex h-full flex-col items-center justify-center gap-2 text-muted-foreground">
-            <Network className="h-8 w-8 text-primary" aria-hidden />
-            <span className="font-mono text-xs">[Add screenshot]</span>
-          </div>
-        )}
+      <div className="flex flex-col md:col-span-5">
+        <h2 className="font-sans text-sub">
+          {p.title}
+          <ArrowUpRight
+            className="ml-1 inline h-[0.7em] w-[0.7em] align-baseline transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"
+            aria-hidden
+          />
+        </h2>
+        <p className="mt-2 font-sans text-small text-muted-foreground">
+          {p.where}
+          {p.status === "In progress" && (
+            <span className="font-bold text-foreground">, in progress</span>
+          )}
+          {" · "}
+          {p.tags.filter((t) => t !== p.where).join(", ")}
+        </p>
+        <p className="mt-4 max-w-[48ch]">{p.summary}</p>
       </div>
-      <div className="flex flex-1 flex-col gap-3 p-4">
-        <div className="flex items-start justify-between gap-2">
-          <h3 className="font-semibold group-hover:text-primary">{p.title}</h3>
-          {p.status === "In progress" && <span className="shrink-0 font-mono text-[10px] uppercase text-primary">WIP</span>}
-        </div>
-        <p className="text-sm text-muted-foreground">{p.summary}</p>
-        <div className="mt-auto flex flex-wrap gap-1.5">
-          {p.tags.map((t) => <TagPill key={t}>{t}</TagPill>)}
-        </div>
+      <div className="aspect-[16/10] overflow-hidden bg-muted md:col-span-7">
+        <img
+          src={p.thumbnail}
+          alt=""
+          loading="lazy"
+          className="h-full w-full object-cover object-left-top transition-transform duration-700 group-hover:scale-[1.03]"
+        />
       </div>
     </Link>
   );

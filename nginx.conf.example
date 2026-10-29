@@ -1,5 +1,16 @@
+# Serves the static build from `npm run build:static`: copy dist/ to /var/www/portfolio.
 server {
   listen 80;
   root /var/www/portfolio;
-  location / { try_files $uri $uri/ /index.html; }
+
+  # pdf.js renders the resume with a .mjs worker; browsers refuse it without a JS type.
+  include mime.types;
+  types { application/javascript mjs; }
+
+  # /about -> about.html, /projects/pi-hole -> projects/pi-hole.html, anything else -> the 404 page.
+  location / { try_files $uri $uri.html $uri/index.html =404; }
+  error_page 404 /404.html;
+
+  # Built files have content hashes in their names, so they can be cached for good.
+  location /assets/ { expires 1y; add_header Cache-Control "public, immutable"; }
 }

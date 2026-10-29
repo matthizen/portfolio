@@ -5,100 +5,195 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --font-sans: "Libre Franklin", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Source Serif 4", ui-serif, Georgia, serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  /* Five type steps for the whole site. */
+  --text-small: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);
+  --text-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  --text-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.75rem);
+  --text-sub: clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem);
+  --text-head: clamp(2.25rem, 1.4rem + 3.6vw, 4.75rem);
+
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
+  --color-card-foreground: var(--foreground);
+  --color-popover: var(--card);
+  --color-popover-foreground: var(--foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--card);
+  --color-secondary-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
+  --color-accent: var(--muted);
+  --color-accent-foreground: var(--foreground);
+  --color-destructive: #b42318;
+  --color-destructive-foreground: #fff;
+  --color-border: var(--muted);
+  --color-input: var(--muted);
+  --color-ring: var(--primary);
   --color-code: var(--code);
+  --color-code-ink: var(--code-ink);
+  --color-field: var(--field);
+  --color-field-ink: var(--field-ink);
+  --color-field-soft: var(--field-soft);
+  --color-invert: var(--invert);
+  --color-invert-ink: var(--invert-ink);
 }
 
+/* Paper and ink, mustard as the field colour, royal blue as the one accent. */
 :root {
-  --radius: 0.5rem;
-  --background: oklch(0.985 0.004 220);
-  --foreground: oklch(0.2 0.02 240);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.2 0.02 240);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.2 0.02 240);
-  --primary: oklch(0.52 0.11 200);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.95 0.01 220);
-  --secondary-foreground: oklch(0.25 0.02 240);
-  --muted: oklch(0.95 0.008 220);
-  --muted-foreground: oklch(0.45 0.02 240);
-  --accent: oklch(0.93 0.03 200);
-  --accent-foreground: oklch(0.3 0.06 200);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(0.9 0.01 220);
-  --input: oklch(0.9 0.01 220);
-  --ring: oklch(0.52 0.11 200);
-  --code: oklch(0.96 0.008 220);
+  --background: #f4f3ef;
+  --foreground: #0b0b0b;
+  --card: #e9e7e0;
+  --muted: #dedbd1;
+  --muted-foreground: #4a473e;
+  --primary: #24338f;
+  --primary-foreground: #ffffff;
+  --field: #e1ac10;
+  --field-ink: #0b0b0b;
+  --field-soft: #4d3d0a;
+  --invert: #0b0b0b;
+  --invert-ink: #f4f3ef;
+  --code: #111111;
+  --code-ink: #ecebe6;
 }
 
 .dark {
-  --background: oklch(0.16 0.015 240);
-  --foreground: oklch(0.94 0.008 220);
-  --card: oklch(0.2 0.018 240);
-  --card-foreground: oklch(0.94 0.008 220);
-  --popover: oklch(0.2 0.018 240);
-  --popover-foreground: oklch(0.94 0.008 220);
-  --primary: oklch(0.8 0.13 195);
-  --primary-foreground: oklch(0.16 0.015 240);
-  --secondary: oklch(0.25 0.02 240);
-  --secondary-foreground: oklch(0.94 0.008 220);
-  --muted: oklch(0.24 0.018 240);
-  --muted-foreground: oklch(0.72 0.02 230);
-  --accent: oklch(0.28 0.05 200);
-  --accent-foreground: oklch(0.88 0.1 195);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.8 0.13 195);
-  --code: oklch(0.13 0.012 240);
+  --background: #0f0f0e;
+  --foreground: #ececea;
+  --card: #1b1b19;
+  --muted: #2a2a27;
+  --muted-foreground: #b8b3a5;
+  --primary: #e1ac10;
+  --primary-foreground: #0b0b0b;
+  --field: #d9a40e;
+  --field-ink: #0b0b0b;
+  --field-soft: #47380a;
+  --invert: #ececea;
+  --invert-ink: #0b0b0b;
+  --code: #050505;
+  --code-ink: #ecebe6;
 }
 
 @layer base {
-  * { border-color: var(--color-border); }
-  html { overflow-x: hidden; }
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    font-family: var(--font-sans);
+    font-family: var(--font-serif);
+    font-size: var(--text-body);
+    line-height: 1.55;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
   }
-  :focus-visible { outline: 2px solid var(--color-ring); outline-offset: 2px; }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 0.98;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  ::selection {
+    background: var(--field);
+    color: var(--field-ink);
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-ring);
+    outline-offset: 3px;
+  }
 }
 
-@utility grid-bg {
-  background-image:
-    linear-gradient(var(--color-border) 1px, transparent 1px),
-    linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
-  background-size: 32px 32px;
+/* Wide diagrams stay legible on phones: they scroll sideways inside their frame. */
+@utility diagram-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+/* Section parts rise in once as they enter. Content is visible without JS. */
+.js [data-reveal] > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.js [data-reveal] > *:nth-child(2) {
+  transition-delay: 80ms;
+}
+.js [data-reveal] > *:nth-child(3) {
+  transition-delay: 160ms;
+}
+.js [data-reveal] > *:nth-child(4) {
+  transition-delay: 240ms;
+}
+.js [data-reveal] > *:nth-child(n + 5) {
+  transition-delay: 320ms;
+}
+.js [data-reveal].is-in > * {
+  opacity: 1;
+  transform: none;
+}
+
+/* The hero name settles as the first screen scrolls away. */
+@keyframes name-settle {
+  to {
+    transform: scale(0.93);
+    opacity: 0.85;
+  }
+}
+@supports (animation-timeline: scroll()) {
+  .hero-name {
+    transform-origin: left center;
+    animation: name-settle linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0 90vh;
+  }
+}
+
+/* Screenshots drift very slowly inside their frames. */
+@keyframes drift {
+  from {
+    transform: scale(1.04) translateX(0);
+  }
+  to {
+    transform: scale(1.04) translateX(-1.5%);
+  }
+}
+.drift {
+  animation: drift 14s ease-in-out infinite alternate;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition: none !important; }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  .js [data-reveal] > * {
+    opacity: 1;
+    transform: none;
+  }
 }
