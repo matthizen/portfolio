@@ -149,7 +149,7 @@ function Resume() {
             <h2 id="pdf-h" className="font-sans text-sub">
               The PDF
             </h2>
-            <p className="mt-3 text-muted-foreground">The exact file you'll download, one page.</p>
+            <p className="mt-3 text-muted-foreground">{"\n"}</p>
             <div className="mt-6 bg-card p-2">
               <ResumeViewer src={site.resume} title="Resume of Matthews Martinez, PDF, one page" />
             </div>
