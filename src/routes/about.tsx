@@ -63,7 +63,7 @@ const skills: Record<string, string[]> = {
     "Cisco IOS",
     "Cisco Packet Tracer",
     "Wireshark",
-    "Netgate 1100",
+    "Netgate",
     "Ubiquiti",
     "Structured cabling",
   ],
