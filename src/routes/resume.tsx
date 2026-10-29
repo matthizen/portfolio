@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Download } from "lucide-react";
 import type { ReactNode } from "react";
-import { Page, buttonInk, seo } from "@/components/site/Layout";
+import { Page, seo } from "@/components/site/Layout";
 import { ResumeViewer } from "@/components/site/ResumeViewer";
 import { contacts, external, site } from "@/data/site";
 import { resume } from "@/data/resume";
@@ -68,13 +67,6 @@ function Resume() {
             Everything is on this page; nothing to open or unfold. The PDF is the same document,
             ready to print or forward.
           </p>
-          <a
-            href={site.resume}
-            download="Matthews_Martinez_Resume.pdf"
-            className={`${buttonInk} mt-6`}
-          >
-            <Download className="h-4 w-4" aria-hidden /> Download the PDF
-          </a>
         </div>
       </div>
 
