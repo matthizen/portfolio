@@ -150,7 +150,7 @@ function About() {
               className="aspect-[4/3] h-auto w-full object-cover object-left-top"
             />
             <figcaption className="mt-3 font-sans text-small text-muted-foreground">
-              Tailscale: the way back in from school.
+              Tailscale: the way back in from anywhere.
             </figcaption>
           </figure>
           <figure className="md:col-span-7">
