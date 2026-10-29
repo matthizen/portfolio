@@ -96,7 +96,7 @@ function Intro() {
     ],
     [
       "How to reach me.",
-      `Email ${site.email} or call ${site.phone}. I'm also on LinkedIn and GitHub, and every project starts life in my Notion notebook.`,
+      `Email ${site.email}. I'm also on LinkedIn and GitHub, and every project starts life in my Notion notebook.`,
     ],
   ];
   return (

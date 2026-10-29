@@ -101,14 +101,12 @@ export function SiteHeader() {
   );
 }
 
-const footerLinks = contacts.filter((c) => c.label !== "Phone");
-
 export function SiteFooter() {
   return (
     <footer className="bg-card">
       <nav aria-label="Contact" className="mx-auto max-w-[1440px] px-4 py-8 sm:px-6 lg:px-8">
         <ul className="flex flex-wrap gap-x-8 gap-y-3 font-sans text-small font-bold">
-          {footerLinks.map((c) => (
+          {contacts.map((c) => (
             <li key={c.label}>
               <a href={c.href} {...external(c.href)} className="hover:underline underline-offset-4">
                 {c.label}
