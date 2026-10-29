@@ -50,7 +50,6 @@ function Contact() {
               value={msg}
               onChange={(e) => setMsg(e.target.value)}
               placeholder="Hi Matt, I'm hiring for…"
-              aria-describedby={`${id}-next`}
               className="h-16 w-full bg-card pl-5 pr-16 font-sans text-[1.0625rem] outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-inset focus:ring-primary"
             />
             <button
@@ -61,10 +60,6 @@ function Contact() {
               <ArrowRight className="h-5 w-5" aria-hidden />
             </button>
           </div>
-          <p id={`${id}-next`} className="mt-4">
-            This opens your own email app with the message filled in. Nothing is sent from this
-            site.
-          </p>
         </form>
 
         <ul data-reveal className="grid content-start gap-4 lg:col-span-5 lg:col-start-8">
