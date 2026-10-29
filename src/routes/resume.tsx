@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Download } from "lucide-react";
 import type { ReactNode } from "react";
-import { Page, buttonInk, seo } from "@/components/site/Layout";
+import { Page, seo } from "@/components/site/Layout";
 import { ResumeViewer } from "@/components/site/ResumeViewer";
 import { contacts, external, site } from "@/data/site";
 import { resume } from "@/data/resume";
