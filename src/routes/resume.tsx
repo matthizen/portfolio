@@ -64,8 +64,7 @@ function Resume() {
         <h1 className="text-head lg:col-span-7">My resume, in full</h1>
         <div className="lg:col-span-5">
           <p className="max-w-[44ch]">
-            Everything is on this page; nothing to open or unfold. The PDF is the same document,
-            ready to print or forward.
+            Everything is on this page; nothing to open or unfold.
           </p>
         </div>
       </div>
