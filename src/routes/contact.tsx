@@ -8,7 +8,7 @@ export const Route = createFileRoute("/contact")({
   head: () =>
     seo(
       "Contact",
-      "Write to Matthews Martinez about internships and entry-level network or infrastructure roles, by email, phone, LinkedIn, GitHub or Notion.",
+      "Write to Matthews Martinez about internships and entry-level network or infrastructure roles, by email, LinkedIn, GitHub or Notion.",
     ),
   component: Contact,
 });

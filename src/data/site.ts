@@ -8,8 +8,6 @@ export const site = {
   location: "Newark, New Jersey",
   school: "NJIT, B.A. Information Technology, class of 2027",
   email: "martinezmatthews01@gmail.com",
-  phone: "(475) 283-8955",
-  phoneHref: "tel:+14752838955",
   linkedin: "https://www.linkedin.com/in/matthews-martinez/",
   github: "https://github.com/matthizen",
   notion:
@@ -20,12 +18,11 @@ export const site = {
 /** Every way to reach me, in order of how fast I answer. Used by the hero, footer, contact and resume pages. */
 export const contacts = [
   { label: "Email", value: site.email, href: `mailto:${site.email}` },
-  { label: "Phone", value: site.phone, href: site.phoneHref },
   { label: "LinkedIn", value: "in/matthews-martinez", href: site.linkedin },
   { label: "GitHub", value: "matthizen", href: site.github },
   { label: "Notion", value: "Project notebook", href: site.notion },
 ];
 
-/** Opens off-site links in a new tab; mail and phone links open the visitor's own app. */
+/** Opens off-site links in a new tab; mail links open the visitor's own app. */
 export const external = (href: string) =>
   /^https?:/.test(href) ? { target: "_blank", rel: "noreferrer" } : {};
