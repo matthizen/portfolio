@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { Page, seo } from "@/components/site/Layout";
-import { ResumeViewer } from "@/components/site/ResumeViewer";
 import { contacts, external, site } from "@/data/site";
 import { resume } from "@/data/resume";
 
@@ -70,7 +69,7 @@ function Resume() {
       </div>
 
       <div className="mt-14 grid gap-12 lg:grid-cols-12">
-        <article aria-label="Resume" className="bg-card p-5 sm:p-10 lg:col-span-8">
+        <article aria-label="Resume" className="bg-card p-5 sm:p-10 lg:col-span-12">
           <header>
             <p className="font-sans text-sub font-bold tracking-tight">{site.name}</p>
             <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2 font-sans text-small">
@@ -134,18 +133,6 @@ function Resume() {
             ))}
           </Block>
         </article>
-
-        <aside aria-labelledby="pdf-h" className="lg:col-span-4">
-          <div className="lg:sticky lg:top-8">
-            <h2 id="pdf-h" className="font-sans text-sub">
-              The PDF
-            </h2>
-            <p className="mt-3 text-muted-foreground">{"\n"}</p>
-            <div className="mt-6 bg-card p-2">
-              <ResumeViewer src={site.resume} title="Resume of Matthews Martinez, PDF, one page" />
-            </div>
-          </div>
-        </aside>
       </div>
     </Page>
   );
