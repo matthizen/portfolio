@@ -2,10 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Page, buttonInk, seo } from "@/components/site/Layout";
 import { site } from "@/data/site";
 import { resume } from "@/data/resume";
-import piHole from "@/assets/projects/pi-hole.jpg";
-import pfsense from "@/assets/projects/pfsense.png";
-import tailscale from "@/assets/projects/tailscale.png";
-import homeServer from "@/assets/projects/home-server.png";
 
 export const Route = createFileRoute("/about")({
   head: () =>
@@ -79,7 +75,7 @@ function About() {
   return (
     <Page>
       <h1 data-reveal className="text-head">
-        <span className="block">About Matt</span>
+        <span className="block">About Me</span>
       </h1>
 
       <section
@@ -110,60 +106,6 @@ function About() {
             mechanical faults by following established procedures. The habit carries over: work the
             problem in order, one fault at a time.
           </p>
-        </div>
-      </section>
-
-      <section aria-labelledby="pics-h" className="mt-28 md:mt-40">
-        <h2 id="pics-h" className="sr-only">
-          From the homelab
-        </h2>
-        <div data-reveal className="grid gap-6 md:grid-cols-12">
-          <figure className="md:col-span-7">
-            <img
-              src={piHole}
-              alt="The Raspberry Pi Zero W that runs Pi-hole, with its microSD card, adaptor and power cable"
-              loading="lazy"
-              className="aspect-[4/3] h-auto w-full object-cover"
-            />
-            <figcaption className="mt-3 font-sans text-small text-muted-foreground">
-              The Pi Zero that answers DNS for the whole house.
-            </figcaption>
-          </figure>
-          <figure className="md:col-span-5 md:self-end">
-            <div className="bg-white">
-              <img
-                src={pfsense}
-                alt="Packet Tracer diagram of the home network: pfSense feeding a PoE switch with the Proxmox server, a PC, a printer, the Pi-hole and a UniFi access point"
-                loading="lazy"
-                className="aspect-[4/3] h-auto w-full object-contain"
-              />
-            </div>
-            <figcaption className="mt-3 font-sans text-small text-muted-foreground">
-              The home network, drawn before it was cabled.
-            </figcaption>
-          </figure>
-          <figure className="md:col-span-5">
-            <img
-              src={tailscale}
-              alt="Tailscale client connected, listing a MacBook Air, an iPhone and the pfSense firewall"
-              loading="lazy"
-              className="aspect-[4/3] h-auto w-full object-cover object-left-top"
-            />
-            <figcaption className="mt-3 font-sans text-small text-muted-foreground">
-              Tailscale: the way back in from anywhere.
-            </figcaption>
-          </figure>
-          <figure className="md:col-span-7">
-            <img
-              src={homeServer}
-              alt="Proxmox console listing the plex, portfolio, minecraft and Nagios guests"
-              loading="lazy"
-              className="aspect-[4/3] h-auto w-full object-cover object-left-top"
-            />
-            <figcaption className="mt-3 font-sans text-small text-muted-foreground">
-              The Proxmox node that hosts this site.
-            </figcaption>
-          </figure>
         </div>
       </section>
 
