@@ -200,7 +200,7 @@ function ProjectPage() {
               rel="noopener noreferrer"
               className={`${buttonInk} mt-6`}
             >
-              Open BridgeOpsOne Academy <ExternalLink className="h-4 w-4" aria-hidden />
+              {p.source.label} <ExternalLink className="h-4 w-4" aria-hidden />
             </a>
           </Section>
         )}

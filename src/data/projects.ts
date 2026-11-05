@@ -11,6 +11,7 @@ import labs from "@/assets/projects/troubleshooting-labs.png";
 import minecraft from "@/assets/projects/minecraft.png";
 import homeServer from "@/assets/projects/home-server.png";
 import piHole from "@/assets/projects/pi-hole.jpg";
+import it490Dmz from "@/assets/projects/it490-dmz.png";
 
 export type Tag = "Networking" | "Security" | "Homelab" | "Automation" | "Cloud" | "Monitoring";
 
@@ -24,7 +25,7 @@ export interface Project {
   slug: string;
   title: string;
   /** Where it was built: "Packet Tracer" for simulated designs, "Homelab" for real hardware. */
-  where: "Packet Tracer" | "Homelab" | "Lab platform";
+  where: "Packet Tracer" | "Homelab" | "Lab platform" | "Team project";
   summary: string;
   status: "Done" | "In progress";
   featured?: boolean;
@@ -41,7 +42,8 @@ export interface Project {
   next?: string[];
   /** An addressing plan shown as a table. */
   addressing?: { caption: string; columns: string[]; rows: string[][] };
-  source?: { title: string; text: string; url: string };
+  /** An outside link shown under its own heading; label is the button text. */
+  source?: { title: string; text: string; url: string; label: string };
 }
 
 /** Projects in the Notion notebook that haven't started yet. */
@@ -460,6 +462,97 @@ cat /etc/pve/storage.cfg`,
     learned: [],
   },
   {
+    slug: "it490-dmz-api",
+    title: "IT490: the DMZ and API tier",
+    where: "Team project",
+    summary:
+      "My part of a team-built, multi-VM music app: the only server allowed to reach the internet, pulling Last.fm data and handing it to the rest of the system over RabbitMQ.",
+    status: "Done",
+    tags: ["Networking", "Security", "Automation"],
+    tech: [
+      "PHP (CLI)",
+      "RabbitMQ",
+      "AMQP request/reply",
+      "Last.fm REST API",
+      "JSON",
+      "Ubuntu VMs",
+      "Git and GitHub",
+    ],
+    thumbnail: it490Dmz,
+    images: [
+      {
+        src: it490Dmz,
+        wide: true,
+        alt: "Architecture diagram: the front end and MySQL database sit in an internal zone and talk only to a RabbitMQ broker; the broker passes requests on queue dmz_jobs with routing key us.api to the DMZ processor, which alone makes HTTP calls out to the Last.fm API",
+      },
+    ],
+    overview:
+      "IT490 (Systems Integration at NJIT, spring 2026) splits one web app across separate VMs: a front end, a database, a RabbitMQ broker and a DMZ, each owned by a different teammate. The rule is that nothing inside talks to the internet directly. I owned the DMZ: the one machine that calls the outside world, so if an outside API misbehaves, or someone tries to abuse it, the damage stops there.",
+    built: [
+      "A long-running PHP worker (dmz-processor/processor.php) that listens on its own RabbitMQ queue, dmz_jobs, with routing key us.api, and replies to each request on the same connection.",
+      "One small helper that builds every Last.fm call, so the API key, base URL and JSON format live in one place.",
+      "Three request types the other tiers can ask for: many_artists (the top artists chart, each enriched with listeners, play count, bio and link), many_tracks (the top tracks chart) and single_artist (one artist by name).",
+      "Clean, flat replies: each one says what it is, when it was fetched and carries a payload whose field names match the database's artist_info table, so the database tier can store it without reshaping it.",
+      "Error handling for missing types, missing names and empty API answers, so a bad request gets a clear error back instead of hanging the queue.",
+      "The broker settings for the DMZ (host, vhost, exchange, queue, routing key) in the shared testRabbitMQ.ini, so every VM agreed on where DMZ jobs go.",
+    ],
+    snippets: [
+      {
+        title: "Every outside call goes through one helper",
+        language: "php",
+        code: `function lastfm($url, $api_key, $method, $extras = []) {
+  $query = array_merge([
+    "method"  => $method,
+    "api_key" => $api_key,
+    "format"  => "json",
+  ], $extras);
+
+  $endpoint = $url . "?" . http_build_query($query);
+  return json_decode(file_get_contents($endpoint), true);
+}`,
+      },
+      {
+        title: "The worker: route each request, then listen on the DMZ queue",
+        language: "php",
+        code: `function requests($request) {
+  global $API, $URL;
+  if (!isset($request["type"])) {
+    return ["status" => "error", "message" => "unsupported type"];
+  }
+  switch ($request["type"]) {
+    case "many_artists": return ["status" => "success", "data" => many_artists($URL, $API)];
+    case "many_tracks":  return ["status" => "success", "data" => many_tracks($URL, $API)];
+    // ...
+  }
+}
+
+$server = new rabbitMQServer(__DIR__ . "/../testRabbitMQ.ini", "testServer3");
+$server->process_requests("requests");`,
+      },
+    ],
+    challenges: [
+      "My first version pulled charts on a timer with a cron job and pushed them at the broker. Nobody was asking for them, so I dropped the cron script and made the DMZ answer requests instead: data moves only when another tier asks for it.",
+      "The first processor did too much, with separate weekly-chart, top-artist and artist-info paths. I cut it from about 180 lines to a few small functions with one way in and one reply shape.",
+      "The database needed more than the chart gives (bios, listener counts), so many_artists makes one artist.getInfo call per artist. Going from 50 to 300 to 1,000 artists made a single request slow, a trade-off between richer data and response time.",
+    ],
+    learned: [
+      "Why a DMZ exists: one exposed box with one job, and everything inside reaches the internet only through it.",
+      "RabbitMQ request/reply: queues and routing keys decide which VM gets which job, and the caller waits for the answer.",
+      "Agreeing on the shape of a message is most of the integration work. Once the field names matched the database table, the hand-off just worked.",
+      "Working on a shared repo with a branch per tier (front end, database, DMZ, deployment) so each of us could ship without stepping on each other.",
+    ],
+    next: [
+      "Move the API key out of the code into a config file kept off GitHub.",
+      "Cache chart results on the DMZ so repeated requests don't hit Last.fm every time.",
+    ],
+    source: {
+      title: "The code",
+      text: "My work is on the dmz/api-service branch of the team repository.",
+      url: "https://github.com/matthizen/IT490-004/tree/dmz/api-service",
+      label: "View the branch on GitHub",
+    },
+  },
+  {
     slug: "packet-tracer-troubleshooting-labs",
     title: "Troubleshooting labs",
     where: "Lab platform",
@@ -479,6 +572,7 @@ cat /etc/pve/storage.cfg`,
       title: "Where the labs come from",
       text: "The tickets come from the Operations Labs catalog at BridgeOpsOne Academy, which I'm working through to practise a repeatable, layer-by-layer method.",
       url: "https://bridgeopsone-academy.web.app/dashboard",
+      label: "Open BridgeOpsOne Academy",
     },
     overview:
       "Building a network is half the job. These labs hand me one that's already broken, with a vague ticket, and the work is finding the fault in the order a real engineer would.",
