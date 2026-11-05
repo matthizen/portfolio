@@ -61,11 +61,6 @@ function Resume() {
     <Page>
       <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
         <h1 className="text-head lg:col-span-7">My resume, in full</h1>
-        <div className="lg:col-span-5">
-          <p className="max-w-[44ch]">
-            Everything is on this page; nothing to open or unfold.
-          </p>
-        </div>
       </div>
 
       <div className="mt-14 grid gap-12 lg:grid-cols-12">
