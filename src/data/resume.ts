@@ -53,5 +53,5 @@ export const resume = {
     "Scripting & Automation": ["Python", "Bash", "Git/GitHub"],
     "IT Support": ["Structured cabling"],
   } as Record<string, string[]>,
-  certifications: [{ name: "CCNA", status: "In Progress" }],
+  certifications: [] as { name: string; status: string }[],
 };

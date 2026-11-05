@@ -86,7 +86,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Matthews Martinez builds networks in Packet Tracer and runs them at home: pfSense, Proxmox, Nagios. IT student at NJIT, working toward the CCNA.",
+          "Matthews Martinez builds networks in Packet Tracer and runs them at home: pfSense, Proxmox, Nagios. IT student at NJIT.",
       },
       { name: "author", content: "Matthews Martinez" },
       { property: "og:type", content: "website" },

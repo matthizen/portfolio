@@ -8,7 +8,7 @@ export const Route = createFileRoute("/resume")({
   head: () =>
     seo(
       "Resume",
-      "The resume of Matthews Martinez, shown in full on the page: education, networking projects, experience, skills and certifications.",
+      "The resume of Matthews Martinez, shown in full on the page: education, networking projects, experience, and skills.",
     ),
   component: Resume,
 });
@@ -125,13 +125,15 @@ function Resume() {
             ))}
           </Block>
 
-          <Block title="Certifications">
-            {resume.certifications.map((c) => (
-              <p key={c.name}>
-                <strong className="font-sans">{c.name}</strong> ({c.status.toLowerCase()})
-              </p>
-            ))}
-          </Block>
+          {resume.certifications.length > 0 && (
+            <Block title="Certifications">
+              {resume.certifications.map((c) => (
+                <p key={c.name}>
+                  <strong className="font-sans">{c.name}</strong> ({c.status.toLowerCase()})
+                </p>
+              ))}
+            </Block>
+          )}
         </article>
       </div>
     </Page>

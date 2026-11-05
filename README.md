@@ -2,7 +2,7 @@
 
 **Live site:** https://portfolio.parore-wage.ts.net/
 
-Portfolio of an NJIT Information Technology student (class of 2027) focused on network engineering and IT infrastructure, working toward the CCNA. The site documents 10 projects: enterprise network designs in Cisco Packet Tracer, builds running on real hardware in my homelab, and a ticket-based troubleshooting series.
+Portfolio of an NJIT Information Technology student (class of 2027) focused on network engineering and IT infrastructure. The site documents 10 projects: enterprise network designs in Cisco Packet Tracer, builds running on real hardware in my homelab, and a ticket-based troubleshooting series.
 
 This site is also a project in its own right: it is **self-hosted on my homelab**, not on a hosting platform.
 
