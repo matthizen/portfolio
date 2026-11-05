@@ -9,7 +9,7 @@ export const Route = createFileRoute("/")({
   head: () =>
     seo(
       "Networks and infrastructure",
-      "Matthews Martinez designs networks in Packet Tracer and runs real ones at home: pfSense, Proxmox, Nagios, Tailscale. IT student at NJIT, working toward the CCNA.",
+      "Matthews Martinez designs networks in Packet Tracer and runs real ones at home: pfSense, Proxmox, Nagios, Tailscale. IT student at NJIT.",
     ),
   component: Home,
 });
@@ -30,8 +30,7 @@ function Hero() {
           </div>
           <div data-reveal className="mt-8 grid gap-6 md:mt-10 md:grid-cols-12 md:items-end">
             <p className="max-w-[46ch] font-sans text-lead leading-snug md:col-span-7">
-              IT student at NJIT focused on network engineering and infrastructure, working toward
-              the CCNA.
+              IT student at NJIT focused on network engineering and infrastructure.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row md:col-span-5 md:justify-end">
               <Link
@@ -92,7 +91,7 @@ function Intro() {
     ],
     [
       "What's next.",
-      "The CCNA, which I'm studying for now, and an internship where I can put the same habits to work on a production network: document it, monitor it, change it carefully.",
+      "An internship where I can put the same habits to work on a production network: document it, monitor it, change it carefully.",
     ],
     [
       "How to reach me.",
@@ -292,7 +291,7 @@ function Numbers() {
         data-reveal
         className="mt-24 grid gap-6 bg-card p-6 sm:p-10 md:grid-cols-12 md:items-center"
       >
-        <h3 className="font-sans text-sub md:col-span-7">Next on the list: the CCNA</h3>
+        <h3 className="font-sans text-sub md:col-span-7">Want the full picture?</h3>
         <div className="flex flex-col gap-3 sm:flex-row md:col-span-5 md:justify-end">
           <Link to="/resume" className={buttonAccent}>
             Read the resume

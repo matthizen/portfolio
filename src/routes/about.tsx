@@ -7,7 +7,7 @@ export const Route = createFileRoute("/about")({
   head: () =>
     seo(
       "About",
-      "How Matthews Martinez got into networking, what he works with, and where he's headed: NJIT IT student, homelabber, CCNA candidate.",
+      "How Matthews Martinez got into networking, what he works with, and where he's headed: NJIT IT student and homelabber.",
     ),
   component: About,
 });
@@ -45,8 +45,7 @@ function About() {
           <p className="max-w-[66ch]">
             That grew into a Proxmox server, a Pi-hole, remote access over Tailscale and a Nagios
             monitor, next to a steady run of enterprise designs in Packet Tracer. At NJIT I'm
-            finishing a degree in Information Technology, and I'm studying for the CCNA alongside
-            it.
+            finishing a degree in Information Technology.
           </p>
           <p className="max-w-[66ch]">
             Alongside school I spent two years as an automotive technician trainee, diagnosing
