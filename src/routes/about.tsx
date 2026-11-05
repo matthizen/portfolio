@@ -12,59 +12,6 @@ export const Route = createFileRoute("/about")({
   component: About,
 });
 
-// Skills sourced from the resume and the project write-ups.
-const skills: Record<string, string[]> = {
-  Networking: [
-    "TCP/IP",
-    "IPv4 and IPv6",
-    "Subnetting and CIDR",
-    "VLANs and 802.1Q",
-    "STP",
-    "EtherChannel",
-    "Inter-VLAN routing",
-    "OSPF",
-    "BGP",
-    "RIPv2",
-    "DHCP",
-    "DNS",
-    "NAT",
-  ],
-  "Security and access": [
-    "pfSense firewall rules",
-    "VLAN segmentation",
-    "Tailscale VPN",
-    "ACLs",
-    "RADIUS/AAA",
-    "Pi-hole DNS filtering",
-    "SSH-only management",
-  ],
-  "Servers and virtualisation": [
-    "Proxmox VE",
-    "LXC containers",
-    "Ubuntu Server",
-    "Linux administration",
-    "Apache",
-    "systemd",
-  ],
-  "Monitoring and scripting": [
-    "Nagios",
-    "SNMP",
-    "NRPE",
-    "Webmin",
-    "Bash",
-    "Python",
-    "Git and GitHub",
-  ],
-  "Tools and hardware": [
-    "Cisco IOS",
-    "Cisco Packet Tracer",
-    "Wireshark",
-    "Netgate",
-    "Ubiquiti",
-    "Structured cabling",
-  ],
-};
-
 const facts = [
   ["Studying", "B.A. Information Technology, NJIT"],
   ["Graduating", "May 2027"],
@@ -106,31 +53,6 @@ function About() {
             mechanical faults by following established procedures. The habit carries over: work the
             problem in order, one fault at a time.
           </p>
-        </div>
-      </section>
-
-      <section aria-labelledby="skills-h" className="mt-28 md:mt-40">
-        <h2 id="skills-h" data-reveal className="text-head">
-          What I work with
-        </h2>
-        <div className="mt-14 grid gap-x-10 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
-          {Object.entries(skills).map(([cat, list]) => (
-            <div key={cat} data-reveal>
-              <h3 className="font-sans text-lead">{cat}</h3>
-              <ul className="mt-4 grid gap-1.5 text-muted-foreground">
-                {list.map((s) => (
-                  <li key={s}>{s}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-          <div data-reveal className="bg-field p-6 text-field-ink">
-            <h3 className="font-sans text-lead">Certification: CCNA</h3>
-            <p className="mt-4">
-              In progress. Working through the whole blueprint, from subnetting drills to automation
-              basics.
-            </p>
-          </div>
         </div>
       </section>
 
