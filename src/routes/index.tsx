@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Play } from "lucide-react";
 import { buttonAccent, buttonInk, seo } from "@/components/site/Layout";
 import { projects } from "@/data/projects";
 import { contacts, external, site } from "@/data/site";
+import { channel, thumbnailUrl, videos, watchUrl } from "@/data/youtube";
 import homeServer from "@/assets/projects/home-server.png";
 
 export const Route = createFileRoute("/")({
@@ -261,6 +262,79 @@ function Featured() {
   );
 }
 
+const uploaded = (iso: string) =>
+  new Date(`${iso}T12:00:00Z`).toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+
+function Videos() {
+  return (
+    <section aria-labelledby="yt-h" className="bg-card">
+      <div className="mx-auto max-w-[1440px] px-4 py-28 sm:px-6 md:py-40 lg:px-8">
+        <div data-reveal className="mb-16 grid gap-6 md:grid-cols-12 md:items-end">
+          <div className="md:col-span-7">
+            <h2 id="yt-h" className="text-head">
+              On YouTube
+            </h2>
+            <p className="mt-4 max-w-[44ch] text-lead leading-snug text-muted-foreground">
+              {channel.tagline} Lab walkthroughs on {channel.handle}.
+            </p>
+          </div>
+          <div className="md:col-span-5 md:flex md:justify-end">
+            <a href={channel.url} {...external(channel.url)} className={buttonInk}>
+              Visit the channel <ArrowUpRight className="h-4 w-4" aria-hidden />
+            </a>
+          </div>
+        </div>
+        <ul className="grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+          {videos.map((v) => (
+            <li key={v.id} data-reveal>
+              <article className="flex h-full flex-col">
+                <a
+                  href={watchUrl(v.id)}
+                  {...external(watchUrl(v.id))}
+                  tabIndex={-1}
+                  aria-hidden
+                  className="group relative block overflow-hidden bg-foreground"
+                >
+                  <img
+                    src={thumbnailUrl(v.id)}
+                    alt=""
+                    loading="lazy"
+                    width={480}
+                    height={270}
+                    className="aspect-video h-auto w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                  />
+                  <span className="absolute inset-0 grid place-items-center">
+                    <span className="grid h-14 w-14 place-items-center bg-primary text-primary-foreground transition-transform group-hover:scale-110">
+                      <Play className="h-6 w-6 fill-current" aria-hidden />
+                    </span>
+                  </span>
+                </a>
+                <h3 className="mt-5 font-sans text-[1.25rem] font-bold leading-snug">{v.title}</h3>
+                <p className="mt-2 font-sans text-small text-muted-foreground">
+                  <time dateTime={v.published}>{uploaded(v.published)}</time>
+                </p>
+                <a
+                  href={watchUrl(v.id)}
+                  {...external(watchUrl(v.id))}
+                  className={`${buttonAccent} mt-6 self-start`}
+                >
+                  Watch the video <span className="sr-only">: {v.title}</span>
+                  <ArrowUpRight className="h-4 w-4" aria-hidden />
+                </a>
+              </article>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
 function Numbers() {
   const facts = [
     [
@@ -313,6 +387,7 @@ function Home() {
       <WorkParagraph />
       <BigPicture />
       <Featured />
+      <Videos />
       <Numbers />
     </main>
   );
