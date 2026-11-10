@@ -2,18 +2,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { useId, useState, type FormEvent } from "react";
 import { Page, seo } from "@/components/site/Layout";
-import { contacts, external, site } from "@/data/site";
+import { external, links, site } from "@/data/site";
 
 export const Route = createFileRoute("/contact")({
   head: () =>
     seo(
       "Contact",
-      "Write to Matthews Martinez about internships and entry-level network or infrastructure roles, by email, LinkedIn, GitHub or Notion.",
+      "Write to Matthews Martinez about internships and entry-level network or infrastructure roles, by email, LinkedIn, GitHub, Notion or YouTube.",
     ),
   component: Contact,
 });
-
-const links = contacts;
 
 function Contact() {
   const [msg, setMsg] = useState("");

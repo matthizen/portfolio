@@ -1,8 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
 import { Moon, Sun } from "lucide-react";
-import { contacts, external, site } from "@/data/site";
-import { channel } from "@/data/youtube";
+import { external, links, site } from "@/data/site";
 
 const nav = [
   { to: "/projects", label: "Projects" },
@@ -107,18 +106,13 @@ export function SiteFooter() {
     <footer className="bg-card">
       <nav aria-label="Contact" className="mx-auto max-w-[1440px] px-4 py-8 sm:px-6 lg:px-8">
         <ul className="flex flex-wrap gap-x-8 gap-y-3 font-sans text-small font-bold">
-          {contacts.map((c) => (
+          {links.map((c) => (
             <li key={c.label}>
               <a href={c.href} {...external(c.href)} className="hover:underline underline-offset-4">
                 {c.label}
               </a>
             </li>
           ))}
-          <li>
-            <a href={channel.url} {...external(channel.url)} className="hover:underline underline-offset-4">
-              YouTube
-            </a>
-          </li>
           <li>
             <Link to="/resume" className="hover:underline underline-offset-4">
               Resume

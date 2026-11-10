@@ -1,4 +1,6 @@
 // Personal info pulled from the resume. Edit here to update across the site.
+import { channel } from "./youtube";
+
 export const site = {
   name: "Matthews Martinez",
   short: "Matt",
@@ -15,13 +17,16 @@ export const site = {
   resume: "/resume.pdf",
 };
 
-/** Every way to reach me, in order of how fast I answer. Used by the hero, footer, contact and resume pages. */
+/** Every way to reach me, in order of how fast I answer. The resume page lists these; the hero, footer and contact page use `links`, which adds YouTube. */
 export const contacts = [
   { label: "Email", value: site.email, href: `mailto:${site.email}` },
   { label: "LinkedIn", value: "in/matthews-martinez", href: site.linkedin },
   { label: "GitHub", value: "matthizen", href: site.github },
   { label: "Notion", value: "Project notebook", href: site.notion },
 ];
+
+/** The contacts plus the YouTube channel. Used by the hero, footer and contact page; the resume keeps to `contacts`. */
+export const links = [...contacts, { label: "YouTube", value: channel.handle, href: channel.url }];
 
 /** Opens off-site links in a new tab; mail links open the visitor's own app. */
 export const external = (href: string) =>

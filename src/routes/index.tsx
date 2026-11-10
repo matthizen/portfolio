@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, Play } from "lucide-react";
 import { buttonAccent, buttonInk, seo } from "@/components/site/Layout";
 import { projects } from "@/data/projects";
-import { contacts, external, site } from "@/data/site";
+import { external, links, site } from "@/data/site";
 import { channel, thumbnailUrl, videos, watchUrl } from "@/data/youtube";
 import homeServer from "@/assets/projects/home-server.png";
 
@@ -66,7 +66,7 @@ function Hero() {
             {site.location} · {site.school}
           </p>
           <ul className="flex flex-wrap gap-x-5 gap-y-1">
-            {contacts.map((c) => (
+            {links.map((c) => (
               <li key={c.label}>
                 <a href={c.href} {...external(c.href)} className="font-medium hover:underline">
                   {c.label}
