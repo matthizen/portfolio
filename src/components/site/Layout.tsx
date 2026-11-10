@@ -2,6 +2,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
 import { Moon, Sun } from "lucide-react";
 import { contacts, external, site } from "@/data/site";
+import { channel } from "@/data/youtube";
 
 const nav = [
   { to: "/projects", label: "Projects" },
@@ -113,6 +114,11 @@ export function SiteFooter() {
               </a>
             </li>
           ))}
+          <li>
+            <a href={channel.url} {...external(channel.url)} className="hover:underline underline-offset-4">
+              YouTube
+            </a>
+          </li>
           <li>
             <Link to="/resume" className="hover:underline underline-offset-4">
               Resume
