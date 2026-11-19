@@ -181,6 +181,12 @@ export const projects: Project[] = [
       "T-14 and T-15: the non-author audit and the build-standard audit, with any discrepancies fixed.",
       "The final report, exported configurations and presentation, due 24 November.",
     ],
+    source: {
+      title: "The team repository",
+      text: "Packet Tracer checkpoints, the build standard, meeting notes and test evidence for every sprint.",
+      url: "https://github.com/benpopso/IT491-Team-3-Cisco-Team",
+      label: "View the repository on GitHub",
+    },
   },
   {
     slug: "campus-network",
