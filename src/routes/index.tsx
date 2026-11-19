@@ -16,8 +16,6 @@ export const Route = createFileRoute("/")({
 });
 
 const featured = projects.filter((p) => p.featured).slice(0, 3);
-const homelab = projects.filter((p) => p.where === "Homelab").length;
-const designs = projects.filter((p) => p.where === "Packet Tracer").length;
 
 function Hero() {
   return (
@@ -119,37 +117,6 @@ function Intro() {
             <span className="text-muted-foreground">{v}</span>
           </p>
         ))}
-      </div>
-    </section>
-  );
-}
-
-function WorkParagraph() {
-  return (
-    <section
-      aria-labelledby="work-h"
-      className="mx-auto max-w-[1440px] px-4 pb-28 sm:px-6 md:pb-40 lg:px-8"
-    >
-      <div data-reveal>
-        <p className="font-sans text-sub font-bold leading-[1.35] tracking-[-0.025em]">
-          <span id="work-h">Everything so far:</span>{" "}
-          {projects.map((p, i) => (
-            <span key={p.slug}>
-              <Link
-                to="/projects/$slug"
-                params={{ slug: p.slug }}
-                className="text-muted-foreground underline-offset-[0.15em] transition-colors hover:underline hover:text-foreground focus-visible:text-foreground"
-              >
-                {p.title}
-              </Link>
-              {i < projects.length - 1 ? ", " : "."}
-            </span>
-          ))}
-        </p>
-        <p className="mt-8 font-sans text-small text-muted-foreground">
-          {projects.length} projects: {designs} network designs in Packet Tracer, {homelab} running
-          on real hardware at home, and a ticket-based troubleshooting series.
-        </p>
       </div>
     </section>
   );
@@ -384,7 +351,6 @@ function Home() {
     <main className="flex-1">
       <Hero />
       <Intro />
-      <WorkParagraph />
       <BigPicture />
       <Featured />
       <Videos />
