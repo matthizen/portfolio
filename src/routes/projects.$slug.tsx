@@ -147,7 +147,7 @@ function ProjectPage() {
           <p className="text-lead leading-snug">{p.overview}</p>
         </Section>
 
-        <Section title={p.builtTitle ?? "What I built"}>
+        <Section title="What I built">
           <List items={p.built} />
         </Section>
 
