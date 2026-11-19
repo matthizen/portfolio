@@ -64,7 +64,7 @@ export const roadmap: { title: string; text: string }[] = [
 export const projects: Project[] = [
   {
     slug: "enterprise-network-capstone",
-    title: "Enterprise network capstone",
+    title: "IT491 Capstone Enterprise Network Project",
     where: "Team project",
     summary:
       "A four-person team project: a financial-services office rebuilt in Packet Tracer with six VLANs, OSPF, central DHCP, DNS, RADIUS, Syslog and NTP, and ACLs tested in both directions.",
@@ -501,6 +501,34 @@ cat /etc/pve/storage.cfg`,
     learned: [],
   },
   {
+    slug: "home-server",
+    title: "Proxmox home server",
+    where: "Homelab",
+    summary:
+      "An old desktop with new RAM and an SSD, now the hypervisor every other homelab project runs on.",
+    status: "Done",
+    tags: ["Homelab"],
+    tech: ["Proxmox VE", "Virtualization", "LXC", "RAM and SSD upgrade"],
+    thumbnail: homeServer,
+    images: [
+      {
+        src: homeServer,
+        alt: "Proxmox VE 9.2.2 web console on node pve, with the Shell view open showing pveversion, the cluster resource table for the plex, portfolio, minecraft and Nagios guests, and pvesm storage status",
+      },
+    ],
+    overview:
+      "Rather than buy a server, I upgraded a PC that was sitting unused. It now hosts Plex, this portfolio, a Minecraft server and the Nagios box, each in its own VM or container.",
+    built: [
+      "Upgraded the RAM and swapped in an SSD.",
+      "Installed Proxmox VE, managed from its web UI on port 8006 (address kept private: 203.0.113.x).",
+      "Set up storage and networking so new VMs and containers can be created in minutes.",
+    ],
+    snippets: [],
+    next: ["A Plex media server, with storage shared as a small NAS."],
+    challenges: [],
+    learned: [],
+  },
+  {
     slug: "pfsense-home-network",
     title: "pfSense home edge",
     where: "Homelab",
@@ -615,34 +643,6 @@ cat /etc/pve/storage.cfg`,
       "Lab 10: new IP phones that won't register",
     ],
     snippets: [],
-    challenges: [],
-    learned: [],
-  },
-  {
-    slug: "home-server",
-    title: "Proxmox home server",
-    where: "Homelab",
-    summary:
-      "An old desktop with new RAM and an SSD, now the hypervisor every other homelab project runs on.",
-    status: "Done",
-    tags: ["Homelab"],
-    tech: ["Proxmox VE", "Virtualization", "LXC", "RAM and SSD upgrade"],
-    thumbnail: homeServer,
-    images: [
-      {
-        src: homeServer,
-        alt: "Proxmox VE 9.2.2 web console on node pve, with the Shell view open showing pveversion, the cluster resource table for the plex, portfolio, minecraft and Nagios guests, and pvesm storage status",
-      },
-    ],
-    overview:
-      "Rather than buy a server, I upgraded a PC that was sitting unused. It now hosts Plex, this portfolio, a Minecraft server and the Nagios box, each in its own VM or container.",
-    built: [
-      "Upgraded the RAM and swapped in an SSD.",
-      "Installed Proxmox VE, managed from its web UI on port 8006 (address kept private: 203.0.113.x).",
-      "Set up storage and networking so new VMs and containers can be created in minutes.",
-    ],
-    snippets: [],
-    next: ["A Plex media server, with storage shared as a small NAS."],
     challenges: [],
     learned: [],
   },
