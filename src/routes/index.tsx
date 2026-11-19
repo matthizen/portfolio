@@ -38,7 +38,7 @@ function Hero() {
                   .replace("bg-foreground", "bg-field-ink")
                   .replace("text-background", "text-field")}
               >
-                See the ten builds <ArrowRight className="h-4 w-4" aria-hidden />
+                View projects <ArrowRight className="h-4 w-4" aria-hidden />
               </Link>
               <Link
                 to="/resume"
@@ -181,7 +181,7 @@ function Featured() {
           to="/projects"
           className="font-sans text-small font-bold underline underline-offset-4"
         >
-          All ten projects
+          View all projects
         </Link>
       </div>
       <div className="grid gap-24 md:gap-32">

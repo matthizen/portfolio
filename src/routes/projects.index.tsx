@@ -8,7 +8,7 @@ export const Route = createFileRoute("/projects/")({
   head: () =>
     seo(
       "Projects",
-      "Ten networking, homelab, security and monitoring builds by Matthews Martinez, each with its topology, configs and what went wrong.",
+      "Networking, homelab, security and monitoring projects by Matthews Martinez, each with its topology, configs and what went wrong.",
     ),
   component: Projects,
 });
