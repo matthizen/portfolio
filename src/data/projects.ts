@@ -99,7 +99,7 @@ export const projects: Project[] = [
     ],
     overview:
       "This is a team project: four of us, eight weeks (29 September to 24 November 2026), one network. The client is Kestrel Financial Partners, a fictional finance firm that has outgrown a flat, loosely managed office network: no separation between departments, no central login for admins, no control over who can reach the finance systems and no visibility into what's happening. Each of us owned one area (architecture, switching and routing, network services, security and testing) and built it to a single shared build standard. We ran the work as four Agile sprints and tracked it on a shared Trello board: every user story was a card with an owner and a due date, so at the weekly meeting it was clear who was doing what and what was blocked, and the evidence for each card went into the team's GitHub repository. The hard part isn't any single technology; it's proving they all work together.",
-    builtTitle: "What we built",
+    builtTitle: "What we build",
     built: [
       "Routing: KFP-R1 is the edge router, doing NAT/PAT to a simulated internet (203.0.113.0/24) over a serial link to KFP-R2, the routed core. R2 connects to two Catalyst 3560 multilayer switches over /30 links, and OSPF ties all four together.",
       "Switching: the 3560s route between VLANs through SVIs and feed four Catalyst 2960 access switches over redundant 802.1Q trunks, with an unused VLAN 999 as the native VLAN.",
