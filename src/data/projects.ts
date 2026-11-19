@@ -193,10 +193,10 @@ export const projects: Project[] = [
   },
   {
     slug: "it490-dmz-api",
-    title: "IT490: the DMZ and API tier",
+    title: "IT490 Capstone Project",
     where: "Team project",
     summary:
-      "My part of a team-built, multi-VM music app: the only server allowed to reach the internet, pulling Last.fm data and handing it to the rest of the system over RabbitMQ.",
+      "A team-built music app split across separate VMs that talk only through RabbitMQ. I built the DMZ: the one server allowed to reach the internet, pulling Last.fm data for the rest of the system.",
     status: "Done",
     tags: ["Networking", "Security", "Automation"],
     tech: [
@@ -217,13 +217,14 @@ export const projects: Project[] = [
       },
     ],
     overview:
-      "IT490 (Systems Integration at NJIT, spring 2026) splits one web app across separate VMs: a front end, a database, a RabbitMQ broker and a DMZ, each owned by a different teammate. The rule is that nothing inside talks to the internet directly. I owned the DMZ: the one machine that calls the outside world, so if an outside API misbehaves, or someone tries to abuse it, the damage stops there.",
+      "IT490 (Systems Integration at NJIT, spring 2026) is a team capstone: one web app split across separate VMs, each owned by a different teammate. Ours is a music site where users register, log in, browse top artists and tracks, search for an artist and leave reviews. The front end, the database, the RabbitMQ broker, the DMZ and the deployment tooling each live on their own machine or branch, and they only talk to each other through RabbitMQ messages. The rule is that nothing inside talks to the internet directly. I owned the DMZ: the one machine that calls the outside world, so if an outside API misbehaves, or someone tries to abuse it, the damage stops there.",
     built: [
+      "The team: a PHP and Bootstrap front end (login and registration, artist cards, an explore page with fuzzy search, and reviews), a database listener that handles logins, sessions, artists and reviews in MySQL, the RabbitMQ link between VMs, and bundler and installer scripts that package each tier for deployment.",
       "A long-running PHP worker (dmz-processor/processor.php) that listens on its own RabbitMQ queue, dmz_jobs, with routing key us.api, and replies to each request on the same connection.",
       "One small helper that builds every Last.fm call, so the API key, base URL and JSON format live in one place.",
       "Three request types the other tiers can ask for: many_artists (the top artists chart, each enriched with listeners, play count, bio and link), many_tracks (the top tracks chart) and single_artist (one artist by name).",
       "Clean, flat replies: each one says what it is, when it was fetched and carries a payload whose field names match the database's artist_info table, so the database tier can store it without reshaping it.",
-      "Error handling for missing types, missing names and empty API answers, so a bad request gets a clear error back instead of hanging the queue.",
+      "Error checks for a missing request type and for empty or failed API answers, so a bad request returns an error instead of hanging the queue.",
       "The broker settings for the DMZ (host, vhost, exchange, queue, routing key) in the shared testRabbitMQ.ini, so every VM agreed on where DMZ jobs go.",
     ],
     snippets: [
@@ -273,13 +274,14 @@ $server->process_requests("requests");`,
     ],
     next: [
       "Move the API key out of the code into a config file kept off GitHub.",
+      "Pass the artist name through to single_artist, and send an error back for unknown request types instead of no reply.",
       "Cache chart results on the DMZ so repeated requests don't hit Last.fm every time.",
     ],
     source: {
       title: "The code",
-      text: "My work is on the dmz/api-service branch of the team repository.",
-      url: "https://github.com/matthizen/IT490-004/tree/dmz/api-service",
-      label: "View the branch on GitHub",
+      text: "The team repository has a branch per tier: front end, database, RabbitMQ, deployment and my DMZ work on dmz/api-service.",
+      url: "https://github.com/matthizen/IT490-004",
+      label: "View the repository on GitHub",
     },
   },
   {
