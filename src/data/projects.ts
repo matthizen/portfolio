@@ -186,11 +186,6 @@ export const projects: Project[] = [
       "Breaking something on purpose, like an ACL rule that blocks DHCP, is the quickest way to prove you can find and fix it.",
       "Having someone who didn't build a part audit it catches what the builder stopped seeing.",
     ],
-    next: [
-      "T-10: one end-to-end test, a wireless client that joins, gets an address, resolves a name, reaches its own segment, is blocked from Finance, gets to the internet and shows up in Syslog.",
-      "T-14 and T-15: the non-author audit and the build-standard audit, with any discrepancies fixed.",
-      "The final report, exported configurations and presentation, due 24 November.",
-    ],
     source: {
       title: "The team repository",
       text: "Packet Tracer checkpoints, the build standard, meeting notes and test evidence for every sprint.",
