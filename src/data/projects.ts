@@ -422,7 +422,7 @@ interface GigabitEthernet0/0.100
       {
         src: nagios,
         wide: true,
-        alt: "Terminal on the nagios VM: systemctl status shows nagios4.service active and running, with its worker processes and a journal of successful worker registrations",
+        alt: "Nagios Core service status page listing 23 checks across five hosts (an HP printer, the Nagios server itself, a Windows PC, pfSense and a UniFi U6 access point), with 20 OK and 3 critical",
       },
     ],
     overview:
