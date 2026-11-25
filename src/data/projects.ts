@@ -510,7 +510,8 @@ cat /etc/pve/storage.cfg`,
     images: [
       {
         src: homeServer,
-        alt: "Proxmox VE 9.2.2 web console on node pve, with the Shell view open showing pveversion, the cluster resource table for the plex, portfolio, minecraft and Nagios guests, and pvesm storage status",
+        wide: true,
+        alt: "Proxmox VE 9.2.2 web console on node pve, Datacenter Storage view: the portfolio, minecraft-server and Nagios guests in the tree, and four storage pools, Media (SMB/CIFS), local, local-lvm and mydata, all enabled",
       },
     ],
     overview:
