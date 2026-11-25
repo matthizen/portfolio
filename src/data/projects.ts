@@ -57,7 +57,10 @@ export interface Project {
 
 /** Projects in the Notion notebook that haven't started yet. */
 export const roadmap: { title: string; text: string }[] = [
-  { title: "Cloud", text: "Taking the same networking basics into a cloud provider." },
+  {
+    title: "AWS Network Project",
+    text: "Taking the same networking basics into AWS: a VPC with its own subnets, routing and security groups.",
+  },
 ];
 
 export const projects: Project[] = [
