@@ -269,11 +269,6 @@ $server->process_requests("requests");`,
       "Agreeing on the shape of a message is most of the integration work. Once the field names matched the database table, the hand-off just worked.",
       "Working on a shared repo with a branch per tier (front end, database, DMZ, deployment) so each of us could ship without stepping on each other.",
     ],
-    next: [
-      "Move the API key out of the code into a config file kept off GitHub.",
-      "Pass the artist name through to single_artist, and send an error back for unknown request types instead of no reply.",
-      "Cache chart results on the DMZ so repeated requests don't hit Last.fm every time.",
-    ],
     source: {
       title: "The code",
       text: "The team repository has a branch per tier: front end, database, RabbitMQ, deployment and my DMZ work on dmz/api-service.",
