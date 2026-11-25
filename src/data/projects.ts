@@ -186,11 +186,6 @@ export const projects: Project[] = [
       "Breaking something on purpose, like an ACL rule that blocks DHCP, is the quickest way to prove you can find and fix it.",
       "Having someone who didn't build a part audit it catches what the builder stopped seeing.",
     ],
-    next: [
-      "T-10: one end-to-end test, a wireless client that joins, gets an address, resolves a name, reaches its own segment, is blocked from Finance, gets to the internet and shows up in Syslog.",
-      "T-14 and T-15: the non-author audit and the build-standard audit, with any discrepancies fixed.",
-      "The final report, exported configurations and presentation, due 24 November.",
-    ],
     source: {
       title: "The team repository",
       text: "Packet Tracer checkpoints, the build standard, meeting notes and test evidence for every sprint.",
@@ -427,7 +422,7 @@ interface GigabitEthernet0/0.100
       {
         src: nagios,
         wide: true,
-        alt: "Terminal on the nagios VM: systemctl status shows nagios4.service active and running, with its worker processes and a journal of successful worker registrations",
+        alt: "Nagios Core service status page listing 23 checks across five hosts (an HP printer, the Nagios server itself, a Windows PC, pfSense and a UniFi U6 access point), with 20 OK and 3 critical",
       },
     ],
     overview:
@@ -454,11 +449,6 @@ sudo a2enmod cgi auth_digest authz_groupfile rewrite`,
 pvesm status
 cat /etc/pve/storage.cfg`,
       },
-    ],
-    next: [
-      "SNMP polling for interface and uptime data from the network gear.",
-      "NRPE agents on the Linux hosts for disk, load and memory checks.",
-      "Alerts when a host or service changes state.",
     ],
     challenges: [
       "Creating the VM failed with \"storage 'Media' is not online\": the wizard defaulted to a CIFS share that wasn't mounted. I moved the ISO and disk to local storage and confirmed what was healthy with pvesm status and /etc/pve/storage.cfg.",
