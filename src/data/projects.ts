@@ -13,7 +13,14 @@ import homeServer from "@/assets/projects/home-server.png";
 import piHole from "@/assets/projects/pi-hole.jpg";
 import it490Dmz from "@/assets/projects/it490-dmz.png";
 
-export type Tag = "Networking" | "Security" | "Homelab" | "Automation" | "Cloud" | "Monitoring";
+export type Tag =
+  | "Networking"
+  | "Troubleshooting"
+  | "Security"
+  | "Homelab"
+  | "Automation"
+  | "Cloud"
+  | "Monitoring";
 
 export interface Snippet {
   title: string;
@@ -615,7 +622,7 @@ cat /etc/pve/storage.cfg`,
     summary:
       "Trouble tickets worked like a help desk would: no internet, a dead website, a department offline, phones that won't register.",
     status: "In progress",
-    tags: ["Networking"],
+    tags: ["Networking", "Troubleshooting"],
     tech: ["Cisco Packet Tracer", "Cisco IOS", "Troubleshooting"],
     thumbnail: labs,
     images: [
@@ -641,6 +648,13 @@ cat /etc/pve/storage.cfg`,
       "Lab 6: several departments offline at once",
       "Lab 8: a degraded data-centre link",
       "Lab 10: new IP phones that won't register",
+      "Lab 11: TFTP failure investigation",
+      "Lab 12: wireless authentication failure",
+      "Lab 13: RADIUS authentication failure",
+      "Lab 14: controller connectivity failure",
+      "Lab 15: an ACL blocking traffic",
+      "Lab 16: NAT misconfiguration",
+      "Lab 23: server reachability issues",
     ],
     snippets: [],
     challenges: [],
@@ -716,7 +730,15 @@ cat /etc/pve/storage.cfg`,
 
 /** Tags that at least one project uses, in a fixed order. */
 export const allTags: Tag[] = (
-  ["Networking", "Security", "Homelab", "Monitoring", "Automation", "Cloud"] as Tag[]
+  [
+    "Networking",
+    "Troubleshooting",
+    "Security",
+    "Homelab",
+    "Monitoring",
+    "Automation",
+    "Cloud",
+  ] as Tag[]
 ).filter((t) => projects.some((p) => p.tags.includes(t)));
 
 export function getProject(slug: string) {
