@@ -455,11 +455,6 @@ pvesm status
 cat /etc/pve/storage.cfg`,
       },
     ],
-    next: [
-      "SNMP polling for interface and uptime data from the network gear.",
-      "NRPE agents on the Linux hosts for disk, load and memory checks.",
-      "Alerts when a host or service changes state.",
-    ],
     challenges: [
       "Creating the VM failed with \"storage 'Media' is not online\": the wizard defaulted to a CIFS share that wasn't mounted. I moved the ISO and disk to local storage and confirmed what was healthy with pvesm status and /etc/pve/storage.cfg.",
       "The packaged Apache config only restricted access by IP. I replaced it with real authentication so the dashboard asks for a password.",
