@@ -57,14 +57,6 @@ export interface Project {
 
 /** Projects in the Notion notebook that haven't started yet. */
 export const roadmap: { title: string; text: string }[] = [
-  {
-    title: "Plex server",
-    text: "A media server on the Proxmox node; its container is already in place.",
-  },
-  {
-    title: "Active Directory",
-    text: "A Windows domain lab: users, groups and policy, managed centrally.",
-  },
   { title: "Cloud", text: "Taking the same networking basics into a cloud provider." },
 ];
 
@@ -510,7 +502,8 @@ cat /etc/pve/storage.cfg`,
     images: [
       {
         src: homeServer,
-        alt: "Proxmox VE 9.2.2 web console on node pve, with the Shell view open showing pveversion, the cluster resource table for the plex, portfolio, minecraft and Nagios guests, and pvesm storage status",
+        wide: true,
+        alt: "Proxmox VE 9.2.2 web console on node pve, Datacenter Storage view: the portfolio, minecraft-server and Nagios guests in the tree, and four storage pools, Media (SMB/CIFS), local, local-lvm and mydata, all enabled",
       },
     ],
     overview:
@@ -538,11 +531,11 @@ cat /etc/pve/storage.cfg`,
     images: [
       {
         src: pfsense,
-        alt: "Packet Tracer diagram of the home network: pfSense at the top feeding a PoE switch, which connects the Proxmox server, a PC, a printer, the Pi-hole and a UniFi access point serving a phone, laptop and tablet",
+        alt: "Packet Tracer diagram of the home network: pfSense at the top on 12.21.21.0/24 feeding a PoE switch, which connects the Proxmox server on VLAN 50, a PC on VLAN 99, a printer, the Pi-hole and a UniFi access point serving an iPhone, a ThinkPad and an iPad",
       },
     ],
     overview:
-      "An ISP router decides everything for you. Replacing it with an open-source firewall put routing, DHCP, DNS and the firewall rules where I can see and change them.",
+      "An ISP router decides everything for you. Replacing it with an open-source firewall put routing, DHCP, DNS and the firewall rules where I can see and change them. The diagram is a Packet Tracer model of the network, but the network itself is built on real hardware; a photo of it will go up once it's mounted in a server rack.",
     built: [
       "pfSense+ on a Netgate 1100, its WAN facing the ISP router in bridge mode.",
       "LAN into a 6-port unmanaged switch, later replaced with a different switch.",
