@@ -18,11 +18,7 @@ function Projects() {
   const list = tag === "All" ? projects : projects.filter((p) => p.tags.includes(tag));
   return (
     <Page>
-      <PageTitle title="Projects">
-        <p>
-          Packet Tracer designs and the real network I live on, each with its topology and configs.
-        </p>
-      </PageTitle>
+      <PageTitle title="Projects" />
 
       <div
         role="group"
