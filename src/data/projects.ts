@@ -531,11 +531,11 @@ cat /etc/pve/storage.cfg`,
     images: [
       {
         src: pfsense,
-        alt: "Packet Tracer diagram of the home network: pfSense at the top feeding a PoE switch, which connects the Proxmox server, a PC, a printer, the Pi-hole and a UniFi access point serving a phone, laptop and tablet",
+        alt: "Packet Tracer diagram of the home network: pfSense at the top on 12.21.21.0/24 feeding a PoE switch, which connects the Proxmox server on VLAN 50, a PC on VLAN 99, a printer, the Pi-hole and a UniFi access point serving an iPhone, a ThinkPad and an iPad",
       },
     ],
     overview:
-      "An ISP router decides everything for you. Replacing it with an open-source firewall put routing, DHCP, DNS and the firewall rules where I can see and change them.",
+      "An ISP router decides everything for you. Replacing it with an open-source firewall put routing, DHCP, DNS and the firewall rules where I can see and change them. The diagram is a Packet Tracer model of the network, but the network itself is built on real hardware; a photo of it will go up once it's mounted in a server rack.",
     built: [
       "pfSense+ on a Netgate 1100, its WAN facing the ISP router in bridge mode.",
       "LAN into a 6-port unmanaged switch, later replaced with a different switch.",
