@@ -57,14 +57,6 @@ export interface Project {
 
 /** Projects in the Notion notebook that haven't started yet. */
 export const roadmap: { title: string; text: string }[] = [
-  {
-    title: "Plex server",
-    text: "A media server on the Proxmox node; its container is already in place.",
-  },
-  {
-    title: "Active Directory",
-    text: "A Windows domain lab: users, groups and policy, managed centrally.",
-  },
   { title: "Cloud", text: "Taking the same networking basics into a cloud provider." },
 ];
 
