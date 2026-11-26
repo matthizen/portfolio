@@ -57,7 +57,10 @@ export interface Project {
 
 /** Projects in the Notion notebook that haven't started yet. */
 export const roadmap: { title: string; text: string }[] = [
-  { title: "Cloud", text: "Taking the same networking basics into a cloud provider." },
+  {
+    title: "AWS Network Project",
+    text: "Taking the same networking basics into AWS: a VPC with its own subnets, routing and security groups.",
+  },
 ];
 
 export const projects: Project[] = [
@@ -265,11 +268,6 @@ $server->process_requests("requests");`,
       "RabbitMQ request/reply: queues and routing keys decide which VM gets which job, and the caller waits for the answer.",
       "Agreeing on the shape of a message is most of the integration work. Once the field names matched the database table, the hand-off just worked.",
       "Working on a shared repo with a branch per tier (front end, database, DMZ, deployment) so each of us could ship without stepping on each other.",
-    ],
-    next: [
-      "Move the API key out of the code into a config file kept off GitHub.",
-      "Pass the artist name through to single_artist, and send an error back for unknown request types instead of no reply.",
-      "Cache chart results on the DMZ so repeated requests don't hit Last.fm every time.",
     ],
     source: {
       title: "The code",
@@ -514,7 +512,6 @@ cat /etc/pve/storage.cfg`,
       "Set up storage and networking so new VMs and containers can be created in minutes.",
     ],
     snippets: [],
-    next: ["A Plex media server, with storage shared as a small NAS."],
     challenges: [],
     learned: [],
   },
@@ -677,7 +674,6 @@ cat /etc/pve/storage.cfg`,
       "Dynamic DNS through FreeDNS, so the address survives the ISP changing my public IP.",
     ],
     snippets: [],
-    next: ["More game servers on the same AMP licence."],
     challenges: [],
     learned: [],
   },
